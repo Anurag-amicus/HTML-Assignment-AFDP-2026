@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--SEO and Identity-->
+    <title>Attribute App</title>
+    <meta
+      name="description"
+      content="A semantic, fully accessible attribute app for AFDP."
+    />
+    <link rel="canonical" href="http://localhost:5500/index.html" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!--Open Graph -->
+    <meta property="og:title" content="Attribute App" />
+    <meta
+      property="og:description"
+      content="A semantic, fully accessible attribute app for AFDP."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Link and Favicon -->
+    <link rel="icon" href="./assets/favicon.ico" />
+    <link rel="icon" href="./assets/icon.svg" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+  </head>
+
+  <body>
+    <!-- Accessibility Landmark: The Skip-Link allows keyboard users to jump to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header Landmark -->
+    <header role="banner">
+      <h1>Attribute App</h1>
+      <!-- Primary Navigation Landmark -->
+      <nav role="navigation" aria-label="Primary">
+        <ul>
+          <li>
+            <a href="index.html" aria-current="page">Attribute List</a>
+          </li>
+          <li>
+            <a href="add-attribute.html">Add Attribute</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Landmark -->
+    <main id="main-content">
+      <!-- Section 1: Filtering Attributes -->
+      <section aria-labelledby="filter-heading">
+        <h2 id="filter-heading">Filter Attributes</h2>
+
+        <!-- Search Landmark Role for Form Filters -->
+        <form
+          role="search"
+          method="get"
+          action="index.html"
+          aria-label="Filter attributes"
+        >
+          <div>
+            <label for="search-term">Search Attribute Name</label>
+            <input
+              type="search"
+              id="search-term"
+              name="q"
+              inputmode="search"
+              autocomplete="off"
+              placeholder="e.g., BillingCode"
+            />
+          </div>
+
+          <div>
+            <label for="filter-bu">Business Unit</label>
+            <select id="filter-bu" name="businessUnit">
+              <option value="">All Business Units</option>
+              <option value="sales">Sales</option>
+              <option value="finance">Finance</option>
+              <option value="marketing">Marketing</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="filter-status">Status</label>
+            <select id="filter-status" name="status">
+              <option value="">All Statuses</option>
+              <option value="active">Active Only</option>
+              <option value="inactive">Inactive Only</option>
+            </select>
+          </div>
+
+          <button type="submit">Apply Filters</button>
+        </form>
+
+        <!-- Dynamic ARIA Live Region: Results of the filter done through js in A3 -->
+        <div id="results-status" aria-live="polite">
+          <p>Showing 6 active database records.</p>
+        </div>
+      </section>
+
+      <!-- Section 2: Core Data Content -->
+      <section aria-labelledby="data-heading">
+        <h2 id="data-heading">Attributes</h2>
+
+        <!--Table for displaying attributes-->
+        <table>
+          <caption>
+            List of all attributes
+          </caption>
+          <thead>
+            <tr>
+              <!-- Added IDs for the headers attribute mapping in the Actions column -->
+              <th id="col-name" scope="col" aria-sort="none">
+                <button type="button">Attribute Name</button>
+              </th>
+              <th id="col-bu" scope="col" aria-sort="none">
+                <button type="button">Business Unit</button>
+              </th>
+              <th id="col-loc" scope="col" aria-sort="none">
+                <button type="button">Location</button>
+              </th>
+              <th id="col-company" scope="col" aria-sort="none">
+                <button type="button">Company</button>
+              </th>
+              <th id="col-status" scope="col" aria-sort="none">
+                <button type="button">Status</button>
+              </th>
+              <th id="col-actions" scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--Row 1-->
+            <tr>
+              <th scope="row" id="attr-discount">AverageDiscount Rate</th>
+              <td>Sales</td>
+              <td>Online Store</td>
+              <td>amicus</td>
+              <td><span role="status">Active</span></td>
+              <td headers="col-actions attr-discount">
+                <a
+                  href="edit-attribute.html?id=1"
+                  aria-describedby="attr-discount"
+                  >Edit</a
+                >
+                <form
+                  method="post"
+                  action="/delete-attribute?id=1"
+                  style="display: inline"
+                >
+                  <button type="submit" aria-describedby="attr-discount">
+                    <span class="sr-only">Delete Attribute</span> 🗑️
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <!--Row 2-->
+            <tr>
+              <th scope="row" id="attr-quota">Remaining Quota</th>
+              <td>Sales</td>
+              <td>Regional</td>
+              <td>amicus</td>
+              <td><span role="status">Inactive</span></td>
+              <td headers="col-actions attr-quota">
+                <a href="edit-attribute.html?id=2" aria-describedby="attr-quota"
+                  >Edit</a
+                >
+                <form
+                  method="post"
+                  action="/delete-attribute?id=2"
+                  style="display: inline"
+                >
+                  <button type="submit" aria-describedby="attr-quota">
+                    <span class="sr-only">Delete Attribute</span> 🗑️
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <!--Row 3-->
+            <tr>
+              <th scope="row" id="attr-tax">Tax Bracket</th>
+              <td>Finance</td>
+              <td>Global</td>
+              <td>amicus</td>
+              <td><span role="status">Active</span></td>
+              <td headers="col-actions attr-tax">
+                <a href="edit-attribute.html?id=3" aria-describedby="attr-tax"
+                  >Edit</a
+                >
+                <form
+                  method="post"
+                  action="/delete-attribute?id=3"
+                  style="display: inline"
+                >
+                  <button type="submit" aria-describedby="attr-tax">
+                    <span class="sr-only">Delete Attribute</span> 🗑️
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <!--Row 4-->
+            <tr>
+              <th scope="row" id="attr-audit">Audit Flag</th>
+              <td>Finance</td>
+              <td>Main Office</td>
+              <td>amicus</td>
+              <td><span role="status">Active</span></td>
+              <td headers="col-actions attr-audit">
+                <a href="edit-attribute.html?id=4" aria-describedby="attr-audit"
+                  >Edit</a
+                >
+                <form
+                  method="post"
+                  action="/delete-attribute?id=4"
+                  style="display: inline"
+                >
+                  <button type="submit" aria-describedby="attr-audit">
+                    <span class="sr-only">Delete Attribute</span> 🗑️
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <!--Row 5-->
+            <tr>
+              <th scope="row" id="attr-budget">Campaign Budget</th>
+              <td>Marketing</td>
+              <td>Social Media</td>
+              <td>amicus</td>
+              <td><span role="status">Active</span></td>
+              <td headers="col-actions attr-budget">
+                <a
+                  href="edit-attribute.html?id=5"
+                  aria-describedby="attr-budget"
+                  >Edit</a
+                >
+                <form
+                  method="post"
+                  action="/delete-attribute?id=5"
+                  style="display: inline"
+                >
+                  <button type="submit" aria-describedby="attr-budget">
+                    <span class="sr-only">Delete Attribute</span> 🗑️
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <!--Row 6-->
+            <tr>
+              <th scope="row" id="attr-demo">Target Demographics</th>
+              <td>Marketing</td>
+              <td>Email Outbound</td>
+              <td>amicus</td>
+              <td><span role="status">Inactive</span></td>
+              <td headers="col-actions attr-demo">
+                <a href="edit-attribute.html?id=6" aria-describedby="attr-demo"
+                  >Edit</a
+                >
+                <form
+                  method="post"
+                  action="/delete-attribute?id=6"
+                  style="display: inline"
+                >
+                  <button type="submit" aria-describedby="attr-demo">
+                    <span class="sr-only">Delete Attribute</span> 🗑️
+                  </button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <aside aria-label="Attribute statistics">
+        <h3>Quick Statistics</h3>
+        <ul>
+          <li>Total Tracked Attributes: 6</li>
+          <li>Operational Active States: 4</li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer role="contentinfo">
+      <p>
+        &copy; 2026 Amicus Fresher developer program(AFDP). All rights reserved.
+      </p>
+    </footer>
+  </body>
+</html>

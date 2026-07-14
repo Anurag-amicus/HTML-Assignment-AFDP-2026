@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--SEO and Identity-->
+    <title>Add Attribute | Attribute App</title>
+    <meta
+      name="description"
+      content="A semantic, fully accessible attribute app for AFDP."
+    />
+    <link rel="canonical" href="http://localhost:5500/add-attribute.html" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!--Open Graph -->
+    <meta property="og:title" content="Add Attribute | Attribute App" />
+    <meta
+      property="og:description"
+      content="A semantic, fully accessible attribute app for AFDP."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Link and Favicon -->
+    <link rel="icon" href="./assets/favicon.ico" />
+    <link rel="icon" href="./assets/icon.svg" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+  </head>
+
+  <body>
+    <!-- Accessibility Landmark: The Skip-Link allows keyboard users to jump to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header Landmark -->
+    <header role="banner">
+      <h1>Attribute App</h1>
+
+      <!-- Primary Navigation Landmark -->
+      <nav role="navigation" aria-label="Primary">
+        <ul>
+          <li>
+            <a href="index.html" aria-current="page">Attribute List</a>
+          </li>
+          <li>
+            <a href="add-attribute.html">Add Attribute</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--Main Content Area-->
+    <main id="main-content">
+      <!--The empty Error Summary (hidden for now) -->
+      <div
+        id="form-error-summary"
+        role="alert"
+        aria-live="assertive"
+        hidden
+      ></div>
+
+      <section aria-labelledby="form-title">
+        <h2 id="form-title">Add New Attribute</h2>
+
+        <!--The novalidate form -->
+        <form method="post" action="#" novalidate aria-labelledby="form-title">
+          <fieldset>
+            <legend>Attribute Details</legend>
+            <div>
+              <label for="attr-name">Attribute Name</label>
+              <input
+                type="text"
+                id="attr-name"
+                name="attributeName"
+                required
+                minlength="3"
+                maxlength="50"
+                pattern="^[a-zA-Z0-9 ]+$"
+                aria-describedby="attr-name-hint attr-name-error"
+              />
+              <span id="attr-name-hint"
+                >Letters, numbers, and spaces only (3-50 chars).</span
+              >
+              <span id="attr-name-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div>
+              <label for="attr-bu">Business Unit</label>
+              <select
+                id="attr-bu"
+                name="businessUnit"
+                required
+                aria-describedby="attr-bu-error"
+              >
+                <option value="">Select a Department...</option>
+                <option value="sales">Sales</option>
+                <option value="finance">Finance</option>
+                <option value="marketing">Marketing</option>
+              </select>
+              <span id="attr-bu-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div>
+              <label for="attr-location">Location</label>
+              <input
+                type="text"
+                id="attr-location"
+                name="customerLocation"
+                maxlength="100"
+                aria-describedby="attr-location-hint attr-location-error"
+              />
+              <span id="attr-location-hint"
+                >e.g., Regional Shops, Main Office.</span
+              >
+              <span
+                id="attr-location-error"
+                role="alert"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div>
+              <label for="attr-company">Company</label>
+              <input
+                type="text"
+                id="attr-company"
+                name="company"
+                required
+                aria-describedby="attr-company-hint attr-company-error"
+              />
+              <span id="attr-company-hint">Name of the company.</span>
+              <span
+                id="attr-company-error"
+                role="alert"
+                aria-live="polite"
+              ></span>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Operational Details</legend>
+
+            <div>
+              <span id="status-group-label">Is Active?</span>
+              <!-- Radio buttons wrapped in a group for screen readers -->
+              <div role="group" aria-labelledby="status-group-label">
+                <input
+                  type="radio"
+                  id="status-active"
+                  name="isActive"
+                  value="true"
+                  checked
+                />
+                <label for="status-active">Active</label>
+
+                <input
+                  type="radio"
+                  id="status-inactive"
+                  name="isActive"
+                  value="false"
+                />
+                <label for="status-inactive">Inactive</label>
+              </div>
+            </div>
+
+            <div>
+              <label for="attr-date">Creation Date (Required)</label>
+              <input
+                type="date"
+                id="attr-date"
+                name="createdOn"
+                required
+                max="2026-07-14"
+                aria-describedby="attr-date-hint attr-date-error"
+              />
+              <span id="attr-date-hint">Must be today or in the past.</span>
+              <span id="attr-date-error" role="alert" aria-live="polite"></span>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Additional Notes</legend>
+            <div>
+              <label for="attr-notes">Notes</label>
+              <textarea
+                id="attr-notes"
+                name="notes"
+                rows="4"
+                maxlength="250"
+                aria-describedby="attr-notes-hint attr-notes-error"
+              ></textarea>
+              <span id="attr-notes-hint">Maximum 250 characters.</span>
+              <span
+                id="attr-notes-error"
+                role="alert"
+                aria-live="polite"
+              ></span>
+            </div>
+          </fieldset>
+
+          <button type="submit">Save Attribute</button>
+        </form>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <p>&copy; 2026 Amicus Technology Private Limited.</p>
+    </footer>
+  </body>
+</html>
