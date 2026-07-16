@@ -1,0 +1,43 @@
+body {
+    font-family: var(--font-base);
+    font-size: var(--fs-base);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+ 
+p, h1, h2, h3, h4, h5, h6 {
+    margin-block-end: var(--space-3);
+}
+ 
+a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+ 
+a:hover {
+    color: var(--color-primary-hover);
+    text-decoration-thickness: 2px;
+}
+ 
+
+*:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+ 
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+ 
+/* Ensure anchor jumps don't hide behind a sticky header */
+:target {
+    scroll-margin-top: var(--space-5);
+}
+ 
+/* Highlight text selection */
+::selection {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+}
