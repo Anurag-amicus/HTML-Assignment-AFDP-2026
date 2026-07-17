@@ -1,10 +1,18 @@
 table {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     background-color: var(--color-surface);
     box-shadow: var(--shadow-1);
     border-radius: var(--radius-md);
     overflow: hidden;
+    table-layout: auto;
+}
+
+th, td {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 section,
@@ -16,15 +24,26 @@ aside {
     padding: var(--space-4);
 }
 
+/* Without this, the Delete <form> (a block-level element by default) would
+   wrap onto its own line below the Edit <a>. Flex keeps both actions inline
+   and right-aligned, on both the desktop table and the mobile card layout. */
 .attribute-actions {
     display: flex;
     gap: var(--space-2);
     align-items: center;
     justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
 .attribute-actions form {
     display: inline-flex;
+}
+
+/* Read-only metadata line on the Edit page (e.g. "Record created on <time>") */
+.meta {
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+    margin-block-end: var(--space-4);
 }
  
 /* Sort Indicators via aria-sort (No inline HTML arrows) */
@@ -63,43 +82,47 @@ th[aria-sort="descending"] button::after {
  
 /* Mobile (< 768px / 48em): Convert Table to Cards via CSS only */
 @media (max-width: 47.999em) {
-    table, thead, tbody, th, td, tr {
+    table {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody,
+    tr,
+    td {
         display: block;
     }
-    
-    /* Visually hide headers, but keep them in the DOM for screen readers */
-    thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-    
+
     tr {
         border: 1px solid var(--color-border);
         border-radius: var(--radius-md);
         margin-block-end: var(--space-4);
         background-color: var(--color-surface);
+        overflow: hidden;
     }
-    
-    /* Create a two-column look inside each cell */
-    td, th[scope="row"] {
+
+    td,
+    th[scope="row"] {
         position: relative;
-        display: block;
+        display: grid;
+        grid-template-columns: minmax(90px, 35%) 1fr;
+        gap: var(--space-2);
         padding: var(--space-3);
-        padding-left: 50%; /* Reserve left half for the label */
         border-bottom: 1px solid var(--color-border);
-        text-align: right; /* Data aligns right */
+        text-align: left;
     }
-    
+
     td:last-child {
         border-bottom: none;
     }
- 
-    
-    td::before, th[scope="row"]::before {
+
+    td::before,
+    th[scope="row"]::before {
         content: attr(data-label);
-        position: absolute;
-        left: var(--space-3);
         font-weight: 600;
         color: var(--color-muted);
         text-align: left;
@@ -146,6 +169,37 @@ th[aria-sort="descending"] button::after {
     }
 }
 
+
+/* Container query: collapse the Attribute Card to a tight one-line
+   summary (title + status only) when its container is very narrow,
+   independent of the viewport (see container-type on tbody in layout.css) */
+@container (max-width: 320px) {
+    .attribute-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-2);
+    }
+
+    .attribute-card > td:not([data-label="Status"]) {
+        display: none;
+    }
+
+    .attribute-card > th:not(.attribute-card__title) {
+        display: none;
+    }
+
+    .attribute-card__title {
+        font-weight: 600;
+    }
+}
+
+@container (min-width: 321px) and (max-width: 480px) {
+    .attribute-card {
+        display: block;
+    }
+}
 
 /* Form Layout (Mobile: 1 column, Desktop: 2 columns) */
 fieldset {

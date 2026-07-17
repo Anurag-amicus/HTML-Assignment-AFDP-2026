@@ -66,3 +66,24 @@ a:hover {
     white-space: nowrap;
     border: 0;
 }
+
+/* The skip-link is .sr-only by default so it doesn't occupy visual space,
+   but a sighted keyboard user needs to SEE it once it receives focus.
+   Un-hide it and pin it above everything else via the z-skip-link token. */
+.skip-link:focus {
+    position: fixed;
+    inset-block-start: var(--space-2);
+    inset-inline-start: var(--space-2);
+    width: auto;
+    height: auto;
+    padding: var(--space-2) var(--space-4);
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-2);
+    z-index: var(--z-skip-link);
+}

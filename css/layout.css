@@ -73,29 +73,13 @@ footer {
 }
 
 
+/* Container is set up here (page chrome owns the table's containing block),
+   but the actual @container rules for the card live in components.css —
+   @layer order is reset, tokens, base, layout, components, utilities, pages,
+   so anything in components.css beats layout.css regardless of specificity.
+   The mobile table->card display rules are in components.css too, so the
+   collapse behavior below needs to live in that same (or a later) layer to
+   reliably win. */
 tbody{
   container-type: inline-size;
-}
-
-@container (max-width: 320px) {
-  .attribute-card {
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-2);
-  }
-
-  .attribute-card > td:not([data-label="Status"]) {
-    display: none;
-  }
-
-  .attribute-card > th:not(.attribute-card__title) {
-    display: none;
-  }
-}
-
-@container (min-width: 321px) and (max-width: 480px) {
-  .attribute-card {
-    display:block;
-  }
 }
