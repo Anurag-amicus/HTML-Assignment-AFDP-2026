@@ -32,23 +32,23 @@
 
   <body>
     <!-- Accessibility Landmark: The Skip-Link allows keyboard users to jump to main content -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link sr-only">Skip to main content</a>
 
     <!-- Header Landmark -->
     <header role="banner">
       <h1>Attribute App</h1>
-      <!-- Primary Navigation Landmark -->
-      <nav role="navigation" aria-label="Primary">
-        <ul>
-          <li>
-            <a href="index.html" aria-current="page">Attribute List</a>
-          </li>
-          <li>
-            <a href="add-attribute.html">Add Attribute</a>
-          </li>
-        </ul>
-      </nav>
     </header>
+    <!-- Primary Navigation Landmark -->
+    <nav role="navigation" aria-label="Primary">
+      <ul>
+        <li>
+          <a href="index.html" aria-current="page">Attribute List</a>
+        </li>
+        <li>
+          <a href="add-attribute.html">Add Attribute</a>
+        </li>
+      </ul>
+    </nav>
 
     <!-- Main Landmark -->
     <main id="main-content">
@@ -63,9 +63,12 @@
           action="index.html"
           aria-label="Filter attributes"
         >
-          <div>
-            <label for="search-term">Search Attribute Name</label>
+          <div class="form-field">
+            <label class="form-field__label" for="search-term"
+              >Search Attribute Name</label
+            >
             <input
+              class="form-field__input"
               type="search"
               id="search-term"
               name="q"
@@ -75,9 +78,9 @@
             />
           </div>
 
-          <div>
-            <label for="filter-bu">Business Unit</label>
-            <select id="filter-bu" name="businessUnit">
+          <div class="form-field">
+            <label class="form-field__label" for="filter-bu">Business Unit</label>
+            <select class="form-field__input" id="filter-bu" name="businessUnit">
               <option value="">All Business Units</option>
               <option value="sales">Sales</option>
               <option value="finance">Finance</option>
@@ -85,16 +88,16 @@
             </select>
           </div>
 
-          <div>
-            <label for="filter-status">Status</label>
-            <select id="filter-status" name="status">
+          <div class="form-field">
+            <label class="form-field__label" for="filter-status">Status</label>
+            <select class="form-field__input" id="filter-status" name="status">
               <option value="">All Statuses</option>
               <option value="active">Active Only</option>
               <option value="inactive">Inactive Only</option>
             </select>
           </div>
 
-          <button type="submit">Apply Filters</button>
+          <button class="btn btn--primary" type="submit">Apply Filters</button>
         </form>
 
         <!-- Dynamic ARIA Live Region: Results of the filter done through js in A3 -->
@@ -108,7 +111,7 @@
         <h2 id="data-heading">Attributes</h2>
 
         <!--Table for displaying attributes-->
-        <table>
+        <table class="table">
           <caption>
             List of all attributes
           </caption>
@@ -116,33 +119,34 @@
             <tr>
               <!-- Added IDs for the headers attribute mapping in the Actions column -->
               <th id="col-name" scope="col" aria-sort="none">
-                <button type="button">Attribute Name</button>
+                <button type="button" class="btn btn--ghost">Attribute Name</button>
               </th>
               <th id="col-bu" scope="col" aria-sort="none">
-                <button type="button">Business Unit</button>
+                <button type="button" class="btn btn--ghost">Business Unit</button>
               </th>
               <th id="col-loc" scope="col" aria-sort="none">
-                <button type="button">Location</button>
+                <button type="button" class="btn btn--ghost">Location</button>
               </th>
               <th id="col-company" scope="col" aria-sort="none">
-                <button type="button">Company</button>
+                <button type="button" class="btn btn--ghost">Company</button>
               </th>
               <th id="col-status" scope="col" aria-sort="none">
-                <button type="button">Status</button>
+                <button type="button" class="btn btn--ghost">Status</button>
               </th>
               <th id="col-actions" scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             <!--Row 1-->
-            <tr>
-              <th scope="row" id="attr-discount">AverageDiscount Rate</th>
-              <td>Sales</td>
-              <td>Online Store</td>
-              <td>amicus</td>
-              <td><span role="status">Active</span></td>
-              <td headers="col-actions attr-discount">
+            <tr class="attribute-card">
+              <th scope="row" id="attr-discount" data-label="Attribute Name">AverageDiscount Rate</th>
+              <td data-label="Business Unit">Sales</td>
+              <td data-label="Location">Online Store</td>
+              <td data-label="Company">amicus</td>
+              <td data-label="Status"><span role="status" class="badge badge--active">Active</span></td>
+              <td headers="col-actions attr-discount" data-label="Actions">
                 <a
+                  class="btn btn--ghost btn--sm"
                   href="edit-attribute.html?id=1"
                   aria-describedby="attr-discount"
                   >Edit</a
@@ -150,121 +154,116 @@
                 <form
                   method="post"
                   action="/delete-attribute?id=1"
-                  style="display: inline"
                 >
-                  <button type="submit" aria-describedby="attr-discount">
+                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-discount">
                     <span class="sr-only">Delete Attribute</span> 🗑️
                   </button>
                 </form>
               </td>
             </tr>
             <!--Row 2-->
-            <tr>
-              <th scope="row" id="attr-quota">Remaining Quota</th>
-              <td>Sales</td>
-              <td>Regional</td>
-              <td>amicus</td>
-              <td><span role="status">Inactive</span></td>
-              <td headers="col-actions attr-quota">
-                <a href="edit-attribute.html?id=2" aria-describedby="attr-quota"
+            <tr class="attribute-card--inactive">
+              <th scope="row" id="attr-quota" data-label="Attribute Name">Remaining Quota</th>
+              <td data-label="Business Unit">Sales</td>
+              <td data-label="Location">Regional</td>
+              <td data-label="Company">amicus</td>
+              <td data-label="Status"><span role="status" class="badge badge--inactive">Inactive</span></td>
+              <td headers="col-actions attr-quota" data-label="Actions">
+                <a href="edit-attribute.html?id=2" class="btn btn--ghost btn--sm" aria-describedby="attr-quota"
                   >Edit</a
                 >
                 <form
                   method="post"
                   action="/delete-attribute?id=2"
-                  style="display: inline"
                 >
-                  <button type="submit" aria-describedby="attr-quota">
+                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-quota">
                     <span class="sr-only">Delete Attribute</span> 🗑️
                   </button>
                 </form>
               </td>
             </tr>
             <!--Row 3-->
-            <tr>
-              <th scope="row" id="attr-tax">Tax Bracket</th>
-              <td>Finance</td>
-              <td>Global</td>
-              <td>amicus</td>
-              <td><span role="status">Active</span></td>
-              <td headers="col-actions attr-tax">
-                <a href="edit-attribute.html?id=3" aria-describedby="attr-tax"
+            <tr class="attribute-card">
+              <th scope="row" id="attr-tax" data-label="Attribute Name">Tax Bracket</th>
+              <td data-label="Business Unit">Finance</td>
+              <td data-label="Location">Global</td>
+              <td data-label="Company">amicus</td>
+              <td data-label="Status"><span role="status" class="badge badge--active">Active</span></td>
+              <td headers="col-actions attr-tax" data-label="Actions">
+                <a href="edit-attribute.html?id=3" class="btn btn--ghost btn--sm" aria-describedby="attr-tax"
                   >Edit</a
                 >
                 <form
                   method="post"
                   action="/delete-attribute?id=3"
-                  style="display: inline"
                 >
-                  <button type="submit" aria-describedby="attr-tax">
+                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-tax">
                     <span class="sr-only">Delete Attribute</span> 🗑️
                   </button>
                 </form>
               </td>
             </tr>
             <!--Row 4-->
-            <tr>
-              <th scope="row" id="attr-audit">Audit Flag</th>
-              <td>Finance</td>
-              <td>Main Office</td>
-              <td>amicus</td>
-              <td><span role="status">Active</span></td>
-              <td headers="col-actions attr-audit">
-                <a href="edit-attribute.html?id=4" aria-describedby="attr-audit"
+            <tr class="attribute-card">
+              <th scope="row" id="attr-audit" data-label="Attribute Name">Audit Flag</th>
+              <td data-label="Business Unit">Finance</td>
+              <td data-label="Location">Main Office</td>
+              <td data-label="Company">amicus</td>
+              <td data-label="Status"><span role="status" class="badge badge--active">Active</span></td>
+              <td headers="col-actions attr-audit" data-label="Actions">
+                <a href="edit-attribute.html?id=4" class="btn btn--ghost btn--sm" aria-describedby="attr-audit"
                   >Edit</a
                 >
                 <form
                   method="post"
                   action="/delete-attribute?id=4"
-                  style="display: inline"
                 >
-                  <button type="submit" aria-describedby="attr-audit">
+                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-audit">
                     <span class="sr-only">Delete Attribute</span> 🗑️
                   </button>
                 </form>
               </td>
             </tr>
             <!--Row 5-->
-            <tr>
-              <th scope="row" id="attr-budget">Campaign Budget</th>
-              <td>Marketing</td>
-              <td>Social Media</td>
-              <td>amicus</td>
-              <td><span role="status">Active</span></td>
-              <td headers="col-actions attr-budget">
+            <tr class="attribute-card">
+              <th scope="row" id="attr-budget" data-label="Attribute Name">Campaign Budget</th>
+              <td data-label="Business Unit">Marketing</td>
+              <td data-label="Location">Social Media</td>
+              <td data-label="Company">amicus</td>
+              <td data-label="Status"><span role="status" class="badge badge--active">Active</span></td>
+              <td headers="col-actions attr-budget" data-label="Actions">
                 <a
                   href="edit-attribute.html?id=5"
+                  class="btn btn--ghost btn--sm"
                   aria-describedby="attr-budget"
                   >Edit</a
                 >
                 <form
                   method="post"
                   action="/delete-attribute?id=5"
-                  style="display: inline"
                 >
-                  <button type="submit" aria-describedby="attr-budget">
+                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-budget">
                     <span class="sr-only">Delete Attribute</span> 🗑️
                   </button>
                 </form>
               </td>
             </tr>
             <!--Row 6-->
-            <tr>
-              <th scope="row" id="attr-demo">Target Demographics</th>
-              <td>Marketing</td>
-              <td>Email Outbound</td>
-              <td>amicus</td>
-              <td><span role="status">Inactive</span></td>
-              <td headers="col-actions attr-demo">
-                <a href="edit-attribute.html?id=6" aria-describedby="attr-demo"
+            <tr class="attribute-card--inactive">
+              <th scope="row" id="attr-demo" data-label="Attribute Name">Target Demographics</th>
+              <td data-label="Business Unit">Marketing</td>
+              <td data-label="Location">Email Outbound</td>
+              <td data-label="Company">amicus</td>
+              <td data-label="Status"><span role="status" class="badge badge--inactive">Inactive</span></td>
+              <td headers="col-actions attr-demo" data-label="Actions">
+                <a href="edit-attribute.html?id=6" class="btn btn--ghost btn--sm" aria-describedby="attr-demo"
                   >Edit</a
                 >
                 <form
                   method="post"
                   action="/delete-attribute?id=6"
-                  style="display: inline"
                 >
-                  <button type="submit" aria-describedby="attr-demo">
+                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-demo">
                     <span class="sr-only">Delete Attribute</span> 🗑️
                   </button>
                 </form>

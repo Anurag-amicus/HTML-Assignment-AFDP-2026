@@ -1,0 +1,444 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-1);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+section,
+aside {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-1);
+    padding: var(--space-4);
+}
+
+.attribute-actions {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.attribute-actions form {
+    display: inline-flex;
+}
+ 
+/* Sort Indicators via aria-sort (No inline HTML arrows) */
+th button {
+    background: transparent;
+    border: none;
+    font: inherit;
+    color: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-pill);
+}
+
+nav a[aria-current="page"] {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+}
+ 
+th[aria-sort="ascending"] button::after {
+    content: "↑";
+}
+ 
+th[aria-sort="descending"] button::after {
+    content: "↓";
+}
+ 
+/* Mobile (< 768px / 48em): Convert Table to Cards via CSS only */
+@media (max-width: 47.999em) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    /* Visually hide headers, but keep them in the DOM for screen readers */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        margin-block-end: var(--space-4);
+        background-color: var(--color-surface);
+    }
+    
+    /* Create a two-column look inside each cell */
+    td, th[scope="row"] {
+        position: relative;
+        display: block;
+        padding: var(--space-3);
+        padding-left: 50%; /* Reserve left half for the label */
+        border-bottom: 1px solid var(--color-border);
+        text-align: right; /* Data aligns right */
+    }
+    
+    td:last-child {
+        border-bottom: none;
+    }
+ 
+    
+    td::before, th[scope="row"]::before {
+        content: attr(data-label);
+        position: absolute;
+        left: var(--space-3);
+        font-weight: 600;
+        color: var(--color-muted);
+        text-align: left;
+    }
+}
+ 
+/* Desktop (≥ 768px / 48em): Standard Table */
+@media (min-width: 48em) {
+    th, td {
+        padding: var(--space-3);
+        border-bottom: 1px solid var(--color-border);
+        text-align: left;
+    }
+    
+    /* Align Actions column to the right */
+    td[headers~="col-actions"], th#col-actions {
+        text-align: right;
+    }
+    
+    /* Zebra rows */
+    tbody tr:nth-child(even) {
+        background-color: var(--color-bg);
+    }
+    
+    /* Hover highlight */
+    tbody tr:hover {
+        background-color: var(--color-border); /* Subtle highlight */
+    }
+    
+    /* Sticky <thead> */
+    th {
+        position: sticky;
+        top: 0;
+        background-color: var(--color-surface);
+        z-index: 10;
+        /* Use box-shadow instead of border-bottom so it scrolls cleanly */
+        box-shadow: 0 1px 0 var(--color-border);
+    }
+    
+    /* Focus-visible row indication when a button inside the row is focused */
+    tbody tr:focus-within {
+        outline: 2px solid var(--color-focus-ring);
+        outline-offset: -2px; /* Keeps the outline inside the row boundaries */
+    }
+}
+
+
+/* Form Layout (Mobile: 1 column, Desktop: 2 columns) */
+fieldset {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: var(--space-4);
+    border: 1px solid var(--color-border);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    margin-block-end: var(--space-4);
+    transition: border-color 0.2s ease;
+}
+ 
+legend {
+    font-weight: 600;
+    padding-inline: var(--space-2);
+}
+ 
+@media (min-width: 48em) {
+    fieldset {
+        grid-template-columns: 1fr 1fr; /* Two columns on desktop */
+    }
+    
+    /* Make textareas span both columns so they don't look squished */
+    .form-field:has(textarea) {
+        grid-column: 1 / -1;
+    }
+}
+ 
+/* Base Form Field Styling */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+ 
+.form-field__label {
+    font-weight: 500;
+}
+ 
+.form-field__input {
+    padding: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+}
+ 
+textarea.form-field__input {
+    resize: vertical; /* Allow vertical resizing, prevent horizontal layout breakage */
+}
+ 
+/* Form text hints and errors */
+.form-field__hint {
+    font-size: var(--fs-sm);
+    color: var(--color-muted);
+}
+ 
+.form-field__error {
+    font-size: var(--fs-sm);
+    color: var(--color-danger);
+    font-weight: 500;
+}
+ 
+/* Required-field indicator dynamically generated via :has() */
+/* This checks if the label is a sibling to a required input and adds an asterisk */
+.form-field__label:has(~ [required])::after,
+.form-field__label:has(~ [aria-required="true"])::after {
+    content: " *";
+    color: var(--color-danger);
+}
+ 
+/* Invalid styling using :user-invalid (Browser native) */
+.form-field__input:user-invalid {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 1px var(--color-danger);
+}
+ 
+/* Fallback/JS Hook wrapper styling (.form-field--invalid) */
+.form-field--invalid .form-field__input {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 1px var(--color-danger);
+}
+ 
+/* Modern Parent Selector (:has): Style fieldset if ANY nested input is invalid */
+fieldset:has(:user-invalid),
+fieldset:has(.form-field--invalid) {
+    border-color: var(--color-danger);
+}
+ 
+/* Segmented Control for Active/Inactive Radios (NO JS) */
+div[role="group"] {
+    display: flex;
+    background-color: var(--color-border);
+    padding: var(--space-1);
+    border-radius: var(--radius-pill);
+    width: fit-content;
+}
+ 
+div[role="group"] input[type="radio"] {
+    /* Visually hide the native radio, but keep it accessible to screen readers */
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+ 
+div[role="group"] label {
+    padding: var(--space-1) var(--space-4);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+}
+ 
+/* The magic: using :checked + sibling combinator to style the label */
+div[role="group"] input[type="radio"]:checked + label {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    box-shadow: var(--shadow-1);
+}
+ 
+/* Transfer focus-visible ring from hidden radio to the visible label */
+div[role="group"] input[type="radio"]:focus-visible + label {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    font-family: inherit;
+    /* No animation fallback for users with prefers-reduced-motion */
+    transition: none;
+}
+ 
+/* Button States */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+ 
+/* Button Variants */
+.btn--primary {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+}
+ 
+.btn--danger {
+    background-color: var(--color-danger);
+    color: var(--color-surface);
+}
+ 
+.btn--ghost {
+    background-color: transparent;
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+ 
+.btn--icon {
+    padding: var(--space-2);
+    border-radius: var(--radius-pill);
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+}
+ 
+.btn--sm {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--fs-sm);
+}
+ 
+/* --- Badges --- */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+ 
+.badge--active {
+    background-color: var(--color-success);
+    color: var(--color-surface);
+}
+ 
+.badge--inactive {
+    background-color: var(--color-muted);
+    color: var(--color-surface);
+}
+ 
+/* --- Toast (JS Driven in A3) --- */
+.toast {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-4);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-2);
+    border-top: 4px solid var(--color-primary);
+    z-index: var(--z-toast);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    /* Hidden state */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100%);
+    
+    /* No animation fallback */
+    transition: none;
+}
+ 
+/* Desktop Toast (Fixed bottom-right) */
+@media (min-width: 48em) {
+    .toast {
+        bottom: var(--space-4);
+        right: var(--space-4);
+        left: auto;
+        width: auto;
+        min-width: 300px;
+        border-radius: var(--radius-md);
+        border-top: none;
+        border-left: 4px solid var(--color-primary);
+    }
+}
+ 
+/* JS Active State */
+.toast.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+ 
+/* --- Pagination --- */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-block-start: var(--space-5);
+}
+ 
+.pagination__page,
+.pagination__nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    cursor: pointer;
+    font-weight: 500;
+    padding-inline: var(--space-2);
+}
+ 
+.pagination__page--active {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    border-color: var(--color-primary);
+}
+ 
+/* --- Compositor-Friendly Transitions (Respecting prefers-reduced-motion) --- */
+@media (prefers-reduced-motion: no-preference) {
+    /* Only transition transform and opacity! */
+    .btn {
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    
+    .btn:active:not(:disabled) {
+        transform: scale(0.96);
+    }
+    
+    .btn--primary:hover:not(:disabled),
+    .btn--danger:hover:not(:disabled) {
+        transform: translateY(-2px);
+    }
+ 
+    .toast {
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+    }
+}

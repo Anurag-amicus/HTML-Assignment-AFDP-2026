@@ -32,24 +32,23 @@
 
   <body>
     <!-- Accessibility Landmark: The Skip-Link allows keyboard users to jump to main content -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link sr-only">Skip to main content</a>
 
     <!-- Header Landmark -->
     <header role="banner">
       <h1>Attribute App</h1>
-
-      <!-- Primary Navigation Landmark -->
-      <nav role="navigation" aria-label="Primary">
-        <ul>
-          <li>
-            <a href="index.html" aria-current="page">Attribute List</a>
-          </li>
-          <li>
-            <a href="add-attribute.html">Add Attribute</a>
-          </li>
-        </ul>
-      </nav>
     </header>
+    <!-- Primary Navigation Landmark -->
+    <nav role="navigation" aria-label="Primary">
+      <ul>
+        <li>
+          <a href="index.html">Attribute List</a>
+        </li>
+        <li>
+          <a href="add-attribute.html"  aria-current="page">Add Attribute</a>
+        </li>
+      </ul>
+    </nav>
 
     <!--Main Content Area-->
     <main id="main-content">
@@ -68,9 +67,12 @@
         <form method="post" action="#" novalidate aria-labelledby="form-title">
           <fieldset>
             <legend>Attribute Details</legend>
-            <div>
-              <label class="form-field__label" for="attr-name">Attribute Name</label>
-              <input class="form-field__input"
+            <div class="form-field">
+              <label class="form-field__label" for="attr-name"
+                >Attribute Name</label
+              >
+              <input
+                class="form-field__input"
                 type="text"
                 id="attr-name"
                 name="attributeName"
@@ -83,12 +85,20 @@
               <span class="form-field__hint" id="attr-name-hint"
                 >Letters, numbers, and spaces only (3-50 chars).</span
               >
-              <span class="form-field__error" id="attr-name-error" role="alert" aria-live="polite"></span>
+              <span
+                class="form-field__error"
+                id="attr-name-error"
+                role="alert"
+                aria-live="polite"
+              ></span>
             </div>
 
-            <div>
-              <label class="form-field__label" for="attr-bu">Business Unit</label>
-              <select class="form-field__input"
+            <div class="form-field">
+              <label class="form-field__label" for="attr-bu"
+                >Business Unit</label
+              >
+              <select
+                class="form-field__input"
                 id="attr-bu"
                 name="businessUnit"
                 required
@@ -99,12 +109,20 @@
                 <option value="finance">Finance</option>
                 <option value="marketing">Marketing</option>
               </select>
-              <span class="form-field__error" id="attr-bu-error" role="alert" aria-live="polite"></span>
+              <span
+                class="form-field__error"
+                id="attr-bu-error"
+                role="alert"
+                aria-live="polite"
+              ></span>
             </div>
 
-            <div>
-              <label class="form-field__label" for="attr-location">Location</label>
-              <input class="form-field__input"
+            <div class="form-field">
+              <label class="form-field__label" for="attr-location"
+                >Location</label
+              >
+              <input
+                class="form-field__input"
                 type="text"
                 id="attr-location"
                 name="customerLocation"
@@ -122,16 +140,21 @@
               ></span>
             </div>
 
-            <div>
-              <label class="form-field__label" for="attr-company">Company</label>
-              <input class="form-field__input"
+            <div class="form-field">
+              <label class="form-field__label" for="attr-company"
+                >Company</label
+              >
+              <input
+                class="form-field__input"
                 type="text"
                 id="attr-company"
                 name="company"
                 required
                 aria-describedby="attr-company-hint attr-company-error"
               />
-              <span class="form-field__hint" id="attr-company-hint">Name of the company.</span>
+              <span class="form-field__hint" id="attr-company-hint"
+                >Name of the company.</span
+              >
               <span
                 class="form-field__error"
                 id="attr-company-error"
@@ -144,32 +167,41 @@
           <fieldset>
             <legend>Operational Details</legend>
 
-            <div>
-              <span  id="status-group-label">Is Active?</span>
+            <div class="form-field">
+              <span id="status-group-label">Is Active?</span>
               <!-- Radio buttons wrapped in a group for screen readers -->
               <div role="group" aria-labelledby="status-group-label">
-                <input class="form-field__input"
+                <input
+                  class="form-field__input"
                   type="radio"
                   id="status-active"
                   name="isActive"
                   value="true"
                   checked
                 />
-                <label class="form-field__label" for="status-active">Active</label>
+                <label class="form-field__label" for="status-active"
+                  >Active</label
+                >
 
-                <input class="form-field__input"
+                <input
+                  class="form-field__input"
                   type="radio"
                   id="status-inactive"
                   name="isActive"
                   value="false"
                 />
-                <label class="form-field__label" for="status-inactive">Inactive</label>
+                <label class="form-field__label" for="status-inactive"
+                  >Inactive</label
+                >
               </div>
             </div>
 
-            <div>
-              <label class="form-field__label" for="attr-date">Creation Date (Required)</label>
-              <input class="form-field__input"
+            <div class="form-field">
+              <label class="form-field__label" for="attr-date"
+                >Creation Date (Required)</label
+              >
+              <input
+                class="form-field__input"
                 type="date"
                 id="attr-date"
                 name="createdOn"
@@ -177,23 +209,33 @@
                 max="2026-07-14"
                 aria-describedby="attr-date-hint attr-date-error"
               />
-              <span class="form-field__hint" id="attr-date-hint">Must be today or in the past.</span>
-              <span class="form-field__error" id="attr-date-error" role="alert" aria-live="polite"></span>
+              <span class="form-field__hint" id="attr-date-hint"
+                >Must be today or in the past.</span
+              >
+              <span
+                class="form-field__error"
+                id="attr-date-error"
+                role="alert"
+                aria-live="polite"
+              ></span>
             </div>
           </fieldset>
 
           <fieldset>
             <legend>Additional Notes</legend>
-            <div>
+            <div class="form-field">
               <label class="form-field__label" for="attr-notes">Notes</label>
               <textarea
+                class="form-field__input"
                 id="attr-notes"
                 name="notes"
                 rows="4"
                 maxlength="250"
                 aria-describedby="attr-notes-hint attr-notes-error"
               ></textarea>
-              <span class="form-field__hint" id="attr-notes-hint">Maximum 250 characters.</span>
+              <span class="form-field__hint" id="attr-notes-hint"
+                >Maximum 250 characters.</span
+              >
               <span
                 class="form-field__error"
                 id="attr-notes-error"

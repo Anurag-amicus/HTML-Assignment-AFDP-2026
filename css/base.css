@@ -3,6 +3,7 @@ body {
     font-size: var(--fs-base);
     color: var(--color-text);
     background-color: var(--color-bg);
+    line-height: 1.6;
 }
  
 p, h1, h2, h3, h4, h5, h6 {
@@ -14,6 +15,13 @@ a {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
 }
  
 a:hover {
@@ -30,6 +38,11 @@ a:hover {
 *:focus:not(:focus-visible) {
     outline: none;
 }
+
+*:focus-visible {
+    outline: 3px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
  
 /* Ensure anchor jumps don't hide behind a sticky header */
 :target {
@@ -40,4 +53,16 @@ a:hover {
 ::selection {
     background-color: var(--color-primary);
     color: var(--color-surface);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }

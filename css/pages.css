@@ -1,0 +1,17 @@
+/* Specificity Drill Target Setup */
+
+.btn { background: blue; }
+ button.btn { background: green; }
+ #submit-btn { background: red; } 
+ :where(.btn) { background: pink; }
+ :is(.btn) { background: teal; } 
+ .btn { background: orange } 
+
+
+ 
+/* .btn { background: blue; }
+button.btn { background: green; }
+#submit-btn { background: red; }
+:where(.btn) { background: pink; }
+:is(.btn) { background: teal; }
+.btn { background: orange !important; } */
