@@ -208,3 +208,54 @@ Sass variables are still used for compile-time constants (like media query break
 
 * **What does `prefers-reduced-motion` respect, and what's the WCAG criterion behind it?**
   `prefers-reduced-motion` respects the user's OS-level accessibility settings for minimizing non-essential motion. The WCAG criterion behind it is Success Criterion 2.3.3 (Animation from Interactions), which exists to protect users with vestibular disorders from experiencing dizziness, nausea, or migraines triggered by unnecessary UI motion.
+
+## Task 10
+
+* **Specificity Scores (a, b, c, d):**
+  * `.btn` -> (0, 0, 1, 0)
+  * `button.btn` -> (0, 0, 1, 1)
+  * `#submit-btn` -> (0, 1, 0, 0)
+  * `:where(.btn)` -> (0, 0, 0, 0)
+  * `:is(.btn)` -> (0, 0, 1, 0)
+  * `.btn { ... !important }` -> (0, 0, 1, 0) + !important flag
+  * `style="background: yellow;"` (Inline) -> (1, 0, 0, 0)
+
+* **Prediction & Verification:**
+  * **Prediction:** The button will be **orange**.
+  * **Verification:** DevTools confirms the color is orange. Even though the inline style (yellow) has the highest base specificity, the `!important` declaration on the `.btn` class overrides it.
+
+* **Where `:where()` and `:is()` fall:**
+  * `:where()` always has a specificity of 0 (0, 0, 0), making it incredibly easy to override.
+  * `:is()` takes the specificity of its most specific argument. In this case, `:is(.btn)` has a specificity of (0, 1, 0).
+
+* **What beats an `!important` inline style?**
+  An inline style with `!important` (`style="background: yellow !important;"`) is the highest possible specificity created by an author. The only things that can beat it are `!important` rules originating from the browser's User Agent stylesheet or a custom User stylesheet, or a cascade layer exception.
+
+* **Rule for using `!important` in production code:**
+  `!important` should almost never be used in production code. It breaks the natural cascade and makes CSS exceptionally difficult to maintain. The only acceptable use cases are for single-purpose utility classes (e.g., `.sr-only` or `.hidden`) or when forcefully overriding uneditable third-party CSS.
+
+## Task 11
+
+### style Panel of inactive radio button
+
+ ![image](assets/devtools/Screenshot%202026-07-17%20192338.png)
+
+### compute panel
+
+ ![image](assets/devtools/Screenshot%202026-07-17%20192354.png)
+
+### layout panel
+
+ ![image](assets/devtools/Screenshot%202026-07-17%20192617.png)
+
+### coverage 
+
+![image](assets/devtools/Screenshot%202026-07-17%20192725.png)
+
+### Lighthouse performance across 3 pages
+
+![image](assets/devtools/Screenshot%202026-07-17%20193043.png)
+![image](assets/devtools/Screenshot%202026-07-17%20193117.png)
+![image](assets/devtools/Screenshot%202026-07-17%20193157.png)
+
+
