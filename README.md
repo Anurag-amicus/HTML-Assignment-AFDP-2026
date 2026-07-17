@@ -147,3 +147,64 @@ Sass variables (`$color-primary`) are compiled into static CSS values and once t
 ### When would Sass variables still beat CSS vars?
 
 Sass variables are still used for compile-time constants (like media query breakpoint widths), advanced color math functions (like `darken($color, 10%)`).
+
+
+## Task 4
+
+### Why is `outline: none` without a replacement a WCAG failure?
+  
+  Removing the default focus outline without providing a custom replacement makes it impossible for keyboard-only users (and users relying on assistive technologies) to know which interactive element currently has focus. This fails the WCAG 2.4.7 "Focus Visible" success criterion, completely breaking keyboard navigation.
+
+### What does `:focus-visible` give you that `:focus` does not?
+  
+  `:focus-visible` allows the browser to discriminate between mouse/touch interactions and keyboard interactions. It ensures a strong, accessible focus ring is shown *only* when the user is navigating via keyboard. Using just `:focus` often applies ugly outlines when mouse users click a button, which historically tempted developers to aggressively apply `outline: none` everywhere.
+
+## Task 5: Mobile-First Layout
+
+### Why mobile-first — what bug do you avoid that desktop-first introduces?
+
+  Mobile-first avoids the bug where mobile users are forced to download massive amounts of complex CSS meant for desktop layouts, only to have to override and hide those rules using `max-width` media queries. It ensures the baseline CSS is lightweight and highly performant for constrained devices.
+### Why grid-template-areas over named lines for this scale?
+
+  For page-level macro-layouts (the "chrome"), `grid-template-areas` provides a highly visual, readable, ASCII-art representation of the layout directly in the CSS. Named lines require developers to track complex line numbers or names across multiple elements, which is harder to read and maintain for simple 3x3 grids.
+### Justify the em choice for media queries:
+
+  We use `em` units for media queries because they respect the user's browser-level font-size scaling. If a visually impaired user increases their default browser font size from 16px to 24px, an `em`-based breakpoint will scale proportionally and trigger sooner, preserving the layout. A `px`-based breakpoint remains static and will break the layout when the font scales up.
+ 
+## Task 6: Container Queries
+
+### When does a container query beat a media query? Give one component-level example where media queries actively fail:
+  
+  A container query beats a media query when a component needs to adapt its layout based on the width of its *parent container*, rather than the overall global viewport. A classic example where media queries fail is a "Card" component placed in both a main content area and a narrow right-side sidebar on a desktop screen. A media query looking at the 1200px viewport will incorrectly tell the sidebar card to adopt a wide, horizontal layout (causing it to overflow or squish), whereas a container query correctly tells the sidebar card to adopt its stacked, narrow layout because its specific parent is small.
+
+## Task 7: Responsive Table Strategies
+
+### Why is data-label/::before better than maintaining duplicate mobile/desktop markup?**
+  
+  It adheres to the "Single Source of Truth" principle. Creating two separate HTML structures (e.g., a `<table>` for desktop and a set of `<div>` cards for mobile) and toggling them with `display: none` heavily bloats the DOM. It also introduces the risk of state desynchronization, where JavaScript might update the data in the desktop table but fail to update the mobile cards. Transforming the table visually via CSS avoids this entirely.
+
+### When does this pattern have a screen-reader cost?**
+  
+  Using `::before` pseudo-elements to inject text content can result in a repetitive, verbose experience for users navigating via assistive technologies. Depending on the browser and screen reader combination, the software might announce the native table column header AND the newly injected CSS pseudo-element text, effectively reading the column label twice per cell.
+
+## Task 8: Form Styling & Pseudo-Class Power
+
+* **Three things `:has()` unlocks that previously required JS:**
+  1. Styling a parent element based on its child's state (e.g., turning a `<fieldset>` border red if any nested `<input>` becomes invalid).
+  2. Styling a previous sibling based on a subsequent sibling (e.g., adding a red asterisk to a `<label>` only if the `<input>` that comes *after* it has the `required` attribute).
+  3. Contextual component variations (e.g., styling a `.card` layout as two columns if it `:has(img)`, but a single centered column if it doesn't).
+
+* **Why is `:user-invalid` usually the right choice over `:invalid` in a form UX?**
+  The native `:invalid` pseudo-class is overly aggressive; it immediately triggers on page load for any empty `required` fields, yelling at the user with red error states before they have even started filling out the form. `:user-invalid` provides a far better user experience by waiting until the user has actually interacted with the field and blurred away (or attempted to submit) before applying the error styles.
+
+
+## Task 9: Buttons, Badges, Toast & Transitions
+
+* **Why is `transition: all` an antipattern?**
+  Using `transition: all` forces the browser's main thread to calculate animation frames for every single property that might change on an element (such as `width`, `padding`, `margin`, or `box-shadow`). Animating these properties triggers expensive layout recalculations (reflows) and visual repaints, causing performance bottlenecks, dropped frames, and visual jank on low-end devices.
+
+* **What two CSS properties are cheap to animate and why?**
+  `transform` and `opacity` are cheap to animate because they are offloaded to the GPU's compositor thread. They do not alter the physical geometry of the document or require elements around them to shift, bypassing the expensive layout and paint phases entirely.
+
+* **What does `prefers-reduced-motion` respect, and what's the WCAG criterion behind it?**
+  `prefers-reduced-motion` respects the user's OS-level accessibility settings for minimizing non-essential motion. The WCAG criterion behind it is Success Criterion 2.3.3 (Animation from Interactions), which exists to protect users with vestibular disorders from experiencing dizziness, nausea, or migraines triggered by unnecessary UI motion.

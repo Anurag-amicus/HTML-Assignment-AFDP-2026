@@ -1,85 +1,77 @@
-/* Mobile-first layout: Everything stacked */
+/* layout.css */
+/* Mobile-first layout */
 body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     "header"
     "nav"
     "main"
     "aside"
     "footer";
-  min-height: 100vh;
-  padding: var(--space-4);
   gap: var(--space-4);
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: var(--space-4);
+  min-height: 100vh;
 }
 
-header,
-nav,
-main,
-aside,
-footer {
-  min-width: 0;
-}
+header[role="banner"] { grid-area: header; }
+nav[role="navigation"] { grid-area: nav; }
+main { grid-area: main; }
+aside { grid-area: aside; }
+footer[role="contentinfo"] { grid-area: footer; }
 
-header {
-  grid-area: header;
-}
-nav {
-  grid-area: nav;
-}
-main {
-  grid-area: main;
-}
-aside {
-  grid-area: aside;
-}
-footer {
-  grid-area: footer;
-}
-
-@media (min-width: 48em) {
-  /* ~768px */
+/* Tablet layout */
+@media (min-width: 48em) { /* 768px */
   body {
-    grid-template-columns: minmax(0, 1fr) 300px;
     grid-template-areas:
       "header header"
       "nav nav"
       "main aside"
       "footer footer";
+    grid-template-columns: 2fr 1fr;
   }
-  nav ul {
+  
+  nav[role="navigation"] ul {
     display: flex;
     gap: var(--space-4);
-    align-items: center;
   }
 }
 
 /* Desktop layout */
-@media (min-width: 64em) {
+@media (min-width: 64em) { /* 1024px */
   body {
-    grid-template-columns: 230px minmax(0, 1fr) 280px;
     grid-template-areas:
       "header header header"
       "nav main aside"
       "footer footer footer";
+    grid-template-columns: 200px 1fr 250px;
   }
-  nav ul {
-    display: flex;
+  
+  nav[role="navigation"] ul {
     flex-direction: column;
-    gap: var(--space-2);
   }
 }
 
+/* Nav Link Styles */
+nav[role="navigation"] a {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
 
-/* Container is set up here (page chrome owns the table's containing block),
-   but the actual @container rules for the card live in components.css —
-   @layer order is reset, tokens, base, layout, components, utilities, pages,
-   so anything in components.css beats layout.css regardless of specificity.
-   The mobile table->card display rules are in components.css too, so the
-   collapse behavior below needs to live in that same (or a later) layer to
-   reliably win. */
-tbody{
+nav[role="navigation"] a:hover {
+  background-color: var(--color-surface);
+}
+
+nav[role="navigation"] a[aria-current="page"] {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  font-weight: 500;
+}
+
+/* Container query for cards */
+#main-content {
   container-type: inline-size;
 }

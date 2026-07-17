@@ -1,89 +1,35 @@
+/* base.css */
 body {
-    font-family: var(--font-base);
-    font-size: var(--fs-base);
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    line-height: 1.6;
+  font-family: var(--font-base);
+  font-size: var(--fs-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
- 
-p, h1, h2, h3, h4, h5, h6 {
-    margin-block-end: var(--space-3);
-}
- 
+
+/* Logical properties used below to support RTL layouts natively without overriding left/right */
+h1 { font-size: var(--fs-2xl); margin-block-end: var(--space-4); }
+h2 { font-size: var(--fs-xl); margin-block-end: var(--space-3); }
+h3 { font-size: var(--fs-lg); margin-block-end: var(--space-2); }
+
 a {
-    color: var(--color-primary);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
-button,
-input,
-select,
-textarea {
-    font: inherit;
-}
- 
 a:hover {
-    color: var(--color-primary-hover);
-    text-decoration-thickness: 2px;
-}
- 
-
-*:focus-visible {
-    outline: 3px solid var(--color-focus-ring);
-    outline-offset: 2px;
-}
- 
-*:focus:not(:focus-visible) {
-    outline: none;
+  text-decoration: none;
 }
 
-*:focus-visible {
-    outline: 3px solid var(--color-focus-ring);
-    outline-offset: 2px;
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
 }
- 
-/* Ensure anchor jumps don't hide behind a sticky header */
+
 :target {
-    scroll-margin-top: var(--space-5);
+  scroll-margin-top: var(--space-5);
 }
- 
-/* Highlight text selection */
+
 ::selection {
-    background-color: var(--color-primary);
-    color: var(--color-surface);
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* The skip-link is .sr-only by default so it doesn't occupy visual space,
-   but a sighted keyboard user needs to SEE it once it receives focus.
-   Un-hide it and pin it above everything else via the z-skip-link token. */
-.skip-link:focus {
-    position: fixed;
-    inset-block-start: var(--space-2);
-    inset-inline-start: var(--space-2);
-    width: auto;
-    height: auto;
-    padding: var(--space-2) var(--space-4);
-    margin: 0;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-    background-color: var(--color-surface);
-    color: var(--color-primary);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-2);
-    z-index: var(--z-skip-link);
+  background-color: var(--color-primary);
+  color: var(--color-bg);
 }

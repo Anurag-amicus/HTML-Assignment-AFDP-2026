@@ -1,12 +1,10 @@
-/* Cascading layer priority */
+/* main.css */
 @layer reset, tokens, base, layout, components, utilities, pages;
 
-/* Importing styles */
-@import url(reset.css) layer(reset);
-@import url(tokens.css) layer(tokens);
-@import url(base.css) layer(base);
-@import url(layout.css) layer(layout);
-@import url(components.css) layer(components);
-@import url(utilities.css) layer(utilities);
-@import url(pages.css) layer(pages);
-
+@import 'reset.css' layer(reset);
+@import 'tokens.css' layer(tokens);
+@import 'base.css' layer(base);
+@import 'layout.css' layer(layout);
+@import 'components.css' layer(components);
+@import 'utilities.css' layer(utilities);
+@import 'pages.css' layer(pages);
