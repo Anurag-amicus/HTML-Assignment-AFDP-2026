@@ -1,290 +1,144 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!--SEO and Identity-->
-    <title>Attribute App</title>
-    <meta
-      name="description"
-      content="A semantic, fully accessible attribute app for AFDP."
-    />
-    <link rel="canonical" href="http://localhost:5500/index.html" />
-    <meta name="theme-color" content="#ffffff" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!--Open Graph -->
-    <meta property="og:title" content="Attribute App" />
-    <meta
-      property="og:description"
-      content="A semantic, fully accessible attribute app for AFDP."
-    />
-    <meta property="og:type" content="website" />
+  <!--SEO and Identity-->
+  <title>Attribute App</title>
+  <meta name="description" content="A semantic, fully accessible attribute app for AFDP." />
+  <link rel="canonical" href="http://localhost:5500/index.html" />
+  <meta name="theme-color" content="#ffffff" />
 
-    <!-- Link and Favicon -->
-    <link rel="icon" href="./assets/favicon.ico" />
-    <link rel="icon" href="./assets/icon.svg" />
-    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+  <!--Open Graph -->
+  <meta property="og:title" content="Attribute App" />
+  <meta property="og:description" content="A semantic, fully accessible attribute app for AFDP." />
+  <meta property="og:type" content="website" />
 
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="./css/main.css" />
-  </head>
+  <!-- Link and Favicon -->
+  <link rel="icon" href="./assets/favicon.ico" />
+  <link rel="icon" href="./assets/icon.svg" />
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
 
-  <body>
-    <!-- Accessibility Landmark: The Skip-Link allows keyboard users to jump to main content -->
-    <a href="#main-content" class="skip-link sr-only">Skip to main content</a>
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./css/main.css" />
+  <script type="module" defer src="./js/main.js"></script>
+</head>
 
-    <!-- Header Landmark -->
-    <header role="banner">
-      <h1>Attribute App</h1>
-    </header>
-    <!-- Primary Navigation Landmark -->
-    <nav role="navigation" aria-label="Primary">
-      <ul>
-        <li>
-          <a href="index.html" aria-current="page">Attribute List</a>
-        </li>
-        <li>
-          <a href="add-attribute.html">Add Attribute</a>
-        </li>
-      </ul>
-    </nav>
+<body>
+  <!-- Accessibility Landmark: The Skip-Link allows keyboard users to jump to main content -->
+  <a href="#main-content" class="skip-link sr-only">Skip to main content</a>
 
-    <!-- Main Landmark -->
-    <main id="main-content">
-      <!-- Section 1: Filtering Attributes -->
-      <section aria-labelledby="filter-heading">
-        <h2 id="filter-heading">Filter Attributes</h2>
+  <!-- Header Landmark -->
+  <header role="banner">
+    <h1>Attribute App</h1>
+    <button id="theme-toggle" class="btn btn--ghost" aria-label="Toggle theme">🌓 Theme</button>
+  </header>
+  <!-- Primary Navigation Landmark -->
+  <nav role="navigation" aria-label="Primary">
+    <ul>
+      <li>
+        <a href="index.html" aria-current="page">Attribute List</a>
+      </li>
+      <li>
+        <a href="add-attribute.html">Add Attribute</a>
+      </li>
+    </ul>
+  </nav>
 
-        <!-- Search Landmark Role for Form Filters -->
-        <form
-          role="search"
-          method="get"
-          action="index.html"
-          aria-label="Filter attributes"
-        >
-          <div class="form-field">
-            <label class="form-field__label" for="search-term"
-              >Search Attribute Name</label
-            >
-            <input
-              class="form-field__input"
-              type="search"
-              id="search-term"
-              name="q"
-              inputmode="search"
-              autocomplete="off"
-              placeholder="e.g., BillingCode"
-            />
-          </div>
+  <!-- Main Landmark -->
+  <main id="main-content">
+    <div id="results-status" class="sr-only" aria-live="polite"></div>
+    <!-- Section 1: Filtering Attributes -->
+    <section aria-labelledby="filter-heading">
+      <h2 id="filter-heading">Filter Attributes</h2>
 
-          <div class="form-field">
-            <label class="form-field__label" for="filter-bu">Business Unit</label>
-            <select class="form-field__input" id="filter-bu" name="businessUnit">
-              <option value="">All Business Units</option>
-              <option value="sales">Sales</option>
-              <option value="finance">Finance</option>
-              <option value="marketing">Marketing</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label class="form-field__label" for="filter-status">Status</label>
-            <select class="form-field__input" id="filter-status" name="status">
-              <option value="">All Statuses</option>
-              <option value="active">Active Only</option>
-              <option value="inactive">Inactive Only</option>
-            </select>
-          </div>
-
-          <button class="btn btn--primary" type="submit">Apply Filters</button>
-        </form>
-
-        <!-- Dynamic ARIA Live Region: Results of the filter done through js in A3 -->
-        <div id="results-status" aria-live="polite">
-          <p>Showing 6 active database records.</p>
+      <!-- Search Landmark Role for Form Filters -->
+      <form role="search" method="get" action="index.html" aria-label="Filter attributes">
+        <div class="form-field">
+          <label class="form-field__label" for="search-term">Search Attribute Name</label>
+          <input class="form-field__input" type="search" id="search-term" name="q" inputmode="search" autocomplete="off"
+            placeholder="e.g., BillingCode" />
         </div>
-      </section>
 
-      <!-- Section 2: Core Data Content -->
-      <section aria-labelledby="data-heading">
-        <h2 id="data-heading">Attributes</h2>
+        <div class="form-field">
+          <label class="form-field__label" for="filter-bu">Business Unit</label>
+          <select class="form-field__input" id="filter-bu" name="businessUnit">
+            <option value="">All Business Units</option>
+            <option value="sales">Sales</option>
+            <option value="finance">Finance</option>
+            <option value="marketing">Marketing</option>
+          </select>
+        </div>
 
-        <!--Table for displaying attributes-->
-        <table class="table">
-          <caption>
-            List of all attributes
-          </caption>
-          <thead>
-            <tr>
-              <!-- Added IDs for the headers attribute mapping in the Actions column -->
-              <th id="col-name" scope="col" aria-sort="none">
-                <button type="button" class="btn btn--ghost">Attribute Name</button>
-              </th>
-              <th id="col-bu" scope="col" aria-sort="none">
-                <button type="button" class="btn btn--ghost">Business Unit</button>
-              </th>
-              <th id="col-loc" scope="col" aria-sort="none">
-                <button type="button" class="btn btn--ghost">Location</button>
-              </th>
-              <th id="col-company" scope="col" aria-sort="none">
-                <button type="button" class="btn btn--ghost">Company</button>
-              </th>
-              <th id="col-status" scope="col" aria-sort="none">
-                <button type="button" class="btn btn--ghost">Status</button>
-              </th>
-              <th id="col-actions" scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!--Row 1-->
-            <tr class="attribute-card">
-              <th scope="row" id="attr-discount" class="attribute-card__title" data-label="Attribute Name">AverageDiscount Rate</th>
-              <td data-label="Business Unit">Sales</td>
-              <td data-label="Location">Online Store</td>
-              <td data-label="Company">amicus</td>
-              <td data-label="Status"><span role="status" class="badge badge--active">Active</span></td>
-              <td headers="col-actions attr-discount" class="attribute-actions" data-label="Actions">
-                <a
-                  class="btn btn--ghost btn--sm"
-                  href="edit-attribute.html?id=1"
-                  aria-describedby="attr-discount"
-                  >Edit</a
-                >
-                <form
-                  method="post"
-                  action="/delete-attribute?id=1"
-                >
-                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-discount">
-                    <span class="sr-only">Delete Attribute</span> 🗑️
-                  </button>
-                </form>
-              </td>
-            </tr>
-            <!--Row 2-->
-            <tr class="attribute-card attribute-card--inactive">
-              <th scope="row" id="attr-quota" class="attribute-card__title" data-label="Attribute Name">Remaining Quota</th>
-              <td data-label="Business Unit">Sales</td>
-              <td data-label="Location">Regional</td>
-              <td data-label="Company">amicus</td>
-              <td data-label="Status"><span role="status" class="badge badge--inactive">Inactive</span></td>
-              <td headers="col-actions attr-quota" class="attribute-actions" data-label="Actions">
-                <a href="edit-attribute.html?id=2" class="btn btn--ghost btn--sm" aria-describedby="attr-quota"
-                  >Edit</a
-                >
-                <form
-                  method="post"
-                  action="/delete-attribute?id=2"
-                >
-                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-quota">
-                    <span class="sr-only">Delete Attribute</span> 🗑️
-                  </button>
-                </form>
-              </td>
-            </tr>
-            <!--Row 3-->
-            <tr class="attribute-card">
-              <th scope="row" id="attr-tax" class="attribute-card__title" data-label="Attribute Name">Tax Bracket</th>
-              <td data-label="Business Unit">Finance</td>
-              <td data-label="Location">Global</td>
-              <td data-label="Company">amicus</td>
-              <td data-label="Status"><span role="status" class="badge badge--active">Active</span></td>
-              <td headers="col-actions attr-tax" class="attribute-actions" data-label="Actions">
-                <a href="edit-attribute.html?id=3" class="btn btn--ghost btn--sm" aria-describedby="attr-tax"
-                  >Edit</a
-                >
-                <form
-                  method="post"
-                  action="/delete-attribute?id=3"
-                >
-                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-tax">
-                    <span class="sr-only">Delete Attribute</span> 🗑️
-                  </button>
-                </form>
-              </td>
-            </tr>
-            <!--Row 4-->
-            <tr class="attribute-card">
-              <th scope="row" id="attr-audit" class="attribute-card__title" data-label="Attribute Name">Audit Flag</th>
-              <td data-label="Business Unit">Finance</td>
-              <td data-label="Location">Main Office</td>
-              <td data-label="Company">amicus</td>
-              <td data-label="Status"><span role="status" class="badge badge--active">Active</span></td>
-              <td headers="col-actions attr-audit" class="attribute-actions" data-label="Actions">
-                <a href="edit-attribute.html?id=4" class="btn btn--ghost btn--sm" aria-describedby="attr-audit"
-                  >Edit</a
-                >
-                <form
-                  method="post"
-                  action="/delete-attribute?id=4"
-                >
-                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-audit">
-                    <span class="sr-only">Delete Attribute</span> 🗑️
-                  </button>
-                </form>
-              </td>
-            </tr>
-            <!--Row 5-->
-            <tr class="attribute-card">
-              <th scope="row" id="attr-budget" class="attribute-card__title" data-label="Attribute Name">Campaign Budget</th>
-              <td data-label="Business Unit">Marketing</td>
-              <td data-label="Location">Social Media</td>
-              <td data-label="Company">amicus</td>
-              <td data-label="Status"><span role="status" class="badge badge--active">Active</span></td>
-              <td headers="col-actions attr-budget" class="attribute-actions" data-label="Actions">
-                <a
-                  href="edit-attribute.html?id=5"
-                  class="btn btn--ghost btn--sm"
-                  aria-describedby="attr-budget"
-                  >Edit</a
-                >
-                <form
-                  method="post"
-                  action="/delete-attribute?id=5"
-                >
-                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-budget">
-                    <span class="sr-only">Delete Attribute</span> 🗑️
-                  </button>
-                </form>
-              </td>
-            </tr>
-            <!--Row 6-->
-            <tr class="attribute-card attribute-card--inactive">
-              <th scope="row" id="attr-demo" class="attribute-card__title" data-label="Attribute Name">Target Demographics</th>
-              <td data-label="Business Unit">Marketing</td>
-              <td data-label="Location">Email Outbound</td>
-              <td data-label="Company">amicus</td>
-              <td data-label="Status"><span role="status" class="badge badge--inactive">Inactive</span></td>
-              <td headers="col-actions attr-demo" class="attribute-actions" data-label="Actions">
-                <a href="edit-attribute.html?id=6" class="btn btn--ghost btn--sm" aria-describedby="attr-demo"
-                  >Edit</a
-                >
-                <form
-                  method="post"
-                  action="/delete-attribute?id=6"
-                >
-                  <button type="submit" class="btn btn--danger btn--icon btn--sm" aria-describedby="attr-demo">
-                    <span class="sr-only">Delete Attribute</span> 🗑️
-                  </button>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+        <div class="form-field">
+          <label class="form-field__label" for="filter-status">Status</label>
+          <select class="form-field__input" id="filter-status" name="status">
+            <option value="">All Statuses</option>
+            <option value="active">Active Only</option>
+            <option value="inactive">Inactive Only</option>
+          </select>
+        </div>
 
-      <aside aria-label="Attribute statistics">
-        <h3>Quick Statistics</h3>
-        <ul>
-          <li>Total Tracked Attributes: 6</li>
-          <li>Operational Active States: 4</li>
-        </ul>
-      </aside>
-    </main>
-    <footer role="contentinfo">
-      <p>
-        &copy; 2026 Amicus Fresher developer program(AFDP). All rights reserved.
-      </p>
-    </footer>
-  </body>
+        <button class="btn btn--primary" type="submit">Apply Filters</button>
+      </form>
+    </section>
+
+    <!-- Section 2: Core Data Content -->
+    <section aria-labelledby="data-heading">
+      <h2 id="data-heading">Attributes</h2>
+
+      <!--Table for displaying attributes-->
+      <table class="table">
+        <caption>
+          List of all attributes
+        </caption>
+        <thead>
+          <tr>
+            <!-- Added IDs for the headers attribute mapping in the Actions column -->
+            <th id="col-id" scope="col" aria-sort="none">
+              <button type="button" class="btn btn--ghost">ID</button>
+            </th>
+            <th id="col-name" scope="col" aria-sort="none">
+              <button type="button" class="btn btn--ghost">Attribute Name</button>
+            </th>
+            <th id="col-bu" scope="col" aria-sort="none">
+              <button type="button" class="btn btn--ghost">Business Unit</button>
+            </th>
+            <th id="col-loc" scope="col" aria-sort="none">
+              <button type="button" class="btn btn--ghost">Location</button>
+            </th>
+            <th id="col-company" scope="col" aria-sort="none">
+              <button type="button" class="btn btn--ghost">Company</button>
+            </th>
+            <th id="col-created" scope="col" aria-sort="none">
+              <button type="button" class="btn btn--ghost">Created On</button>
+            </th>
+            <th id="col-status" scope="col" aria-sort="none">
+              <button type="button" class="btn btn--ghost">Status</button>
+            </th>
+            <th id="col-actions" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody aria-live="polite">
+        </tbody>
+      </table>
+    </section>
+
+    <aside aria-label="Attribute statistics">
+      <h3>Quick Statistics</h3>
+      <ul>
+        <li id="stat-total">Total Tracked Attributes: 0</li>
+        <li id="stat-active">Operational Active States: 0</li>
+      </ul>
+    </aside>
+  </main>
+  <footer role="contentinfo">
+    <p>
+      &copy; 2026 Amicus Fresher developer program(AFDP). All rights reserved.
+    </p>
+  </footer>
+</body>
+
 </html>

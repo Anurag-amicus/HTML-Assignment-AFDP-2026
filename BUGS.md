@@ -225,3 +225,131 @@ Setting `min-width: 0` allows the flex item to shrink within the available space
 4. Flexbox layouts often require `min-width: 0` to prevent content overflow.
  
 Understanding these behaviors improves debugging efficiency and leads to more predictable CSS layouts.
+
+# Assignment 3
+
+## Bugs A
+
+### Observation
+
+  * Using var-
+    It prints
+    3
+    3
+    3
+  ![image](assets/devtools/final%20audit/var.png)
+
+### Fix
+
+  * Using let-
+    It Prints
+    0
+    1
+    2
+  ![image](assets/devtools/final%20audit/let.png)
+
+
+Using var creates one shared variable for all loop iterations, so every callback prints the final value. Using let creates a new variable for each iteration, so every callback keeps the correct value.
+
+## Bugs B
+
+### Observation
+
+  In the console we see something like
+  `<button id="btn">Add Row</button>`
+    NaN
+  ![image](assets/devtools/final%20audit/BugsB.png)
+
+### Fix 
+
+  * Method 1: Change the constructor
+
+        class Table {
+        constructor() {
+            this.count = 0;
+            this.addRow = this.addRow.bind(this)
+        }
+        addRow() {
+            this.count++;
+            console.log(this);
+            console.log(this.count);
+        }
+    }
+
+  * Method 2: Arrow function
+
+          addRow = () => {
+          this.count++
+          console.log(this)
+          console.log(this.count)
+          }
+
+## Bugs C
+
+### Observation
+  When forgetting json.parse
+  ![image](assets/devtools/final%20audit/BugsC.png)
+
+### Fix
+  After using json.parse()
+  ![image](assets/devtools/final%20audit/BugsC2.png)
+
+## Bugs D
+
+### Demo
+  ![image](assets/devtools/final%20audit/BugsD.png)
+
+### Fix
+
+  ![image](assets/devtools/final%20audit/BugsD2.png)
+
+## Bugs E
+
+### Without abort controller for scollY event listner
+
+        // 1. Define the handler function
+        function handleScroll() {
+          const scrollY = window.scrollY;
+          console.log('Current Scroll Y:', scrollY);
+        }
+
+        // 2. Attach the listener
+        window.addEventListener('scroll', handleScroll);
+
+        // 3. Remove the listener later when needed
+        // (e.g., when a component unmounts or a user clicks a button)
+        function stopTrackingScroll() {
+          window.removeEventListener('scroll', handleScroll);
+          console.log('Scroll listener removed.');
+        }
+
+  ![image](assets/devtools/final%20audit/BugsE.png)
+
+### With abort controller
+
+        // 1. Create AbortController
+        const controller = new AbortController();
+        const { signal } = controller;
+
+        // 2. Add scroll listener
+        window.addEventListener(
+          'scroll',
+          () => {
+            const scrollY = window.scrollY;
+            console.log('Current Scroll Y:', scrollY);
+
+            // Abort when scroll exceeds 300px
+            if (scrollY > 300) {
+              controller.abort();
+              console.log('Scroll listener aborted at:', scrollY);
+            }
+          },
+          { signal }
+        );
+
+  ![image](assets/devtools/final%20audit/BugsE2.png)
+
+
+## Task 18
+
+![alt text](assets/devtools/final%20audit/t18.png)

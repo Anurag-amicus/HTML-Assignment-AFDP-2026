@@ -259,3 +259,258 @@ Sass variables are still used for compile-time constants (like media query break
 ![image](assets/devtools/Screenshot%202026-07-17%20193157.png)
 
 
+# JS Assignment
+
+## Task 1
+
+* This project uses ES Modules, with each JavaScript file responsible for a single concern, making the codebase easier to maintain, test, and reuse.
+
+* ES modules run in strict mode by default which is helpful for catching errors.
+
+* Module scripts are deferred by default i.e. they are downloaded in parallel but only executed after the HTML has been fully parsed.
+
+* ES modules do not work very well when a page is opened directly with the file:// protocol because browsers enforce CORS/security rules for module imports.
+
+### What does "deferred by default" mean?
+
+  The module runs after the HTML is fully loaded. You can usually use DOM elements without DOMContentLoaded.
+
+### What does VS Code Live Server do?
+
+  It bypasses the CORS/security rules and use HTTP protocol instead of file:// to achive this.
+
+## Task 3
+
+### Why namespace localStorage keys?
+
+  This project uses namespaced localStorage keys like ams.attributes and ams.theme to avoid conflicts with other apps.
+
+### What happens if two apps use "theme"?
+
+  They can overwrite each other's data, causing incorrect behavior.
+
+### Why wrap storage reads in try/catch?
+
+  JSON.parse() can fail if the data is invalid or missing and some browsers (like incognito mode) may block localStorage or have zero storage space, try/catch prevents the app from crashing.
+
+## Task 4
+
+### When is innerHTML acceptable?
+
+  For trusted, fixed HTML that is not from user input.
+
+### When is it dangerous?
+
+  When displaying user or external data.
+
+### What is XSS?
+
+  XSS is an attack where malicious JavaScript is injected into a web page and runs in the user's browser.
+
+### Why is DocumentFragment faster?
+
+  It creates all elements in memory first and adds them to the page once, so the browser performs fewer reflows and layout calculations
+
+## Task 5
+
+### How does debounce work?
+
+  A timer variable is stored in a closure. Every new keystroke clears the old timer with clearTimeout(). A new setTimeout() starts. The function runs only after the user stops typing for the specified delay.
+
+### What bug is avoided by saving filters in the URL?
+
+  Without saving filters in the URL, refreshing the page resets all filters and shows the full list again, which is confusing. Saving them in the URL restores the same filtered view after a refresh.
+
+## Task 6
+
+### What is event delegation?
+
+  It is a technique where one parent element handles events for all of its child elements.
+
+### Why is it better than one listener per element?(Two reasons)
+
+* Uses fewer event listeners, so memory usage is lower.
+* Works automatically for dynamically added elements.
+
+### When does delegation fail?
+
+  It does not work for events that do not bubble, such as:
+  * focus
+  * blur
+  * mouseenter
+  * mouseleave
+
+### What should you use instead?
+
+  Use focusin and focusout for focus-related events because they bubble.
+
+## Task 7
+
+### Why do real apps paginate on the server?
+
+  * To avoid sending huge amounts of data to the browser.
+  * It improves performance and reduces memory usage.
+
+### What breaks at 100k rows on the client?
+
+  * Loading becomes slow.
+  * Memory usage becomes very high.
+  * Filtering, sorting, and rendering become slow and can make the page  unresponsive.
+
+### What is the contract between the client and server?
+
+  * The client sends the page number, page size, sort, and filter values.
+  * The server returns only that page of results along with the total number of records.
+
+## Task 8
+
+### What is the difference between setTimeout() and setInterval()?
+
+  * setTimeout() runs once after a delay.
+  * setInterval() runs repeatedly until it is stopped.
+
+### When does clearTimeout() matter?
+
+  When you need to cancel a pending timeout before it runs, such as when replacing or removing a toast early.
+
+### Why is a single global toast buggy?
+
+  If a new toast appears before the old timer finishes, the old timer can hide the new toast too early.
+
+### How does a Map of timers fix it?
+
+  Each toast gets its own timer stored in the Map, so timers do not interfere with each other.
+
+## Task 9
+
+### How does this dependent-dropdown pattern translate to a real backend (eager-load all locations vs fetch per BU change)?
+
+ * Option 1: Load all locations when the page opens (eager loading).
+ * Option 2: Request locations from the server whenever the Business Unit changes.
+
+### What are the network and payload trade-offs?
+
+* Eager loading
+
+  * Faster after the page loads.
+  * Larger initial download.
+
+* Fetch per BU
+
+  * Smaller initial download.
+  * Requires a new network request each time the Business Unit changes, so there may be a small delay.
+
+## Task 10
+
+### Why can't HTML alone check uniqueness?
+
+  HTML can validate a single field, but it cannot compare it with other existing records.
+
+### Why check "belongs to BU" if the dropdown already restricts it?
+
+  Users can modify form values using browser DevTools, so JavaScript must validate the relationship before saving.
+
+### Why is focus management a WCAG concern?
+
+  After a failed submit, moving focus to the error summary lets keyboard and screen-reader users quickly find and understand the validation errors.
+
+## Task 11
+
+### What does Angular Reactive Forms give you for free?
+
+  * Form state (touched, dirty, pristine)
+  * Validation handling
+  * Error tracking
+  * Form status (valid/invalid)
+
+### What does it NOT give you?
+
+  Your application's business rules, such as uniqueness checks or custom validation logic.
+
+## Task 13
+
+### Promise.all vs Promise.allSettled
+
+  * Promise.all()
+      * Stops immediately if any promise fails (fail-fast).
+      * Best when all requests are required.
+  * Promise.allSettled()
+      * Waits for every promise to finish.
+      * Returns both successful and failed results.
+
+### Which should you use here?
+
+  Use Promise.all() because the app cannot work correctly if even one JSON file is missing.
+
+### What does Promise.any() solve?
+
+  Promise.any() returns the first successful promise and ignores failures unless all promises fail. It is useful when multiple sources can provide the same data and you only need one to succeed.
+
+## Task 14
+
+### Why is debounce alone not enough?
+
+  Debounce reduces the number of requests, but an older request can still finish after a newer one and overwrite the correct results. This is called the stale-response-wins bug.
+
+### How does AbortController fix this?
+
+  It cancels the previous request before starting a new one, so only the latest request can update the page.
+
+### When else is AbortController used in vanilla JavaScript?
+
+  To cancel fetch() requests.
+  To automatically remove event listeners using the signal option.
+  To cancel reading from a ReadableStream.
+
+## Task 15
+
+### Does fetch() reject on a 404?
+
+  No. It resolves successfully, but response.ok is false.
+
+### What does try/catch catch?
+
+  Network errors and exceptions that are thrown.
+
+### What does it miss?
+
+  HTTP errors such as 404 and 500, unless you throw an error yourself.
+
+### How to handle both?
+  
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+  
+### How is Axios different?
+
+  Axios automatically rejects the promise for HTTP errors (like 404 or 500), so they are handled directly in the catch block.
+
+## Task 16
+
+### Why prefer the user's choice over the OS preference?
+
+  Because the user has explicitly chosen the theme they want, and that preference should not be changed automatically.
+
+### What is the CSS-only equivalent?
+
+  The prefers-color-scheme media query.
+
+### Why is the JavaScript toggle better here?
+
+  It allows users to override the system theme and saves their choice in localStorage, so the same theme is used every time they visit the app.
+
+## Final Lighthouse Scores
+
+### index-page
+
+  ![image](assets/devtools/final%20audit/Screenshot%202026-07-20%20160430.png)
+
+### add-attribute-page
+
+  ![image](assets/devtools/final%20audit/Screenshot%202026-07-20%20160619.png)
+
+### edit-attribute-page
+
+  ![image](assets/devtools/final%20audit/Screenshot%202026-07-20%20160710.png)
