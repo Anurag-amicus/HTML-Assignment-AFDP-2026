@@ -28,6 +28,7 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="./css/main.css" />
+    <script type="module" defer src="./js/main.js"></script>
   </head>
 
   <body>
@@ -37,6 +38,7 @@
     <!-- Header Landmark -->
     <header role="banner">
       <h1>Attribute App</h1>
+      <button id="theme-toggle" class="btn btn--ghost" aria-label="Toggle theme">🌓 Theme</button>
     </header>
     <!-- Primary Navigation Landmark -->
     <nav role="navigation" aria-label="Primary">
@@ -78,12 +80,12 @@
                 name="attributeName"
                 required
                 minlength="3"
-                maxlength="50"
-                pattern="^[a-zA-Z0-9 ]+$"
+                maxlength="100"
+                pattern="^[a-zA-Z0-9 _-]+$"
                 aria-describedby="attr-name-hint attr-name-error"
               />
               <span class="form-field__hint" id="attr-name-hint"
-                >Letters, numbers, and spaces only (3-50 chars).</span
+                >Letters, numbers, and spaces only (3-100 chars).</span
               >
               <span
                 class="form-field__error"
@@ -121,15 +123,15 @@
               <label class="form-field__label" for="attr-location"
                 >Location</label
               >
-              <input
+              <select
                 class="form-field__input"
-                type="text"
                 id="attr-location"
                 name="customerLocation"
-                maxlength="100"
                 required
                 aria-describedby="attr-location-hint attr-location-error"
-              />
+              >
+                <option value="">Select a Business Unit first</option>
+              </select>
               <span class="form-field__hint" id="attr-location-hint"
                 >e.g., Regional Shops, Main Office.</span
               >
@@ -145,14 +147,15 @@
               <label class="form-field__label" for="attr-company"
                 >Company</label
               >
-              <input
+              <select
                 class="form-field__input"
-                type="text"
                 id="attr-company"
                 name="company"
                 required
                 aria-describedby="attr-company-hint attr-company-error"
-              />
+              >
+                <option value="">Select a Company...</option>
+              </select>
               <span class="form-field__hint" id="attr-company-hint"
                 >Name of the company.</span
               >
@@ -231,11 +234,11 @@
                 id="attr-notes"
                 name="notes"
                 rows="4"
-                maxlength="250"
+                maxlength="500"
                 aria-describedby="attr-notes-hint attr-notes-error"
               ></textarea>
               <span class="form-field__hint" id="attr-notes-hint"
-                >Maximum 250 characters.</span
+                >0 / 500 characters</span
               >
               <span
                 class="form-field__error"

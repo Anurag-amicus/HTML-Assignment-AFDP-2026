@@ -2,15 +2,18 @@
 :root {
   /* Colors */
   --color-bg: #ffffff;
-  --color-surface: #f9fafb;
+  --color-surface: #f3f4f6; 
+  --color-surface-50: #f8fafc; 
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
   --color-text: #111827;
-  --color-muted: #6b7280;
+  --color-muted: #4b5563; 
   --color-primary: #000000;
   --color-primary-hover: #374151;
   --color-danger: #ef4444;
   --color-danger-hover: #dc2626;
-  --color-success: #10b981;
-  --color-border: #e5e7eb;
+  --color-success: #01875b;
+  --color-border: #d1d5db;
   --color-focus-ring: #2563eb;
 
   /* Spacing */
@@ -27,6 +30,7 @@
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
   --fs-base: 1rem;
+  
   /* Fluid typography using clamp */
   --fs-lg: clamp(1.125rem, 2vw + 1rem, 1.25rem);
   --fs-xl: clamp(1.25rem, 3vw + 1rem, 1.5rem);
@@ -51,6 +55,9 @@
 [data-theme="dark"] {
   --color-bg: #111827;
   --color-surface: #1f2937;
+  --color-surface-50: #1f2937; /* Same as surface for dark mode */
+  --color-surface-100: #374151; /* Gray-700 */
+  --color-surface-200: #4b5563; /* Gray-600 */
   --color-text: #f9fafb;
   --color-muted: #9ca3af;
   --color-primary: #ffffff;

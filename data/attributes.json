@@ -1,0 +1,152 @@
+[
+  {
+    "id": "01",
+    "attributeName": "Average Discount Rate",
+    "businessUnitId": "sales",
+    "customerLocationId": "loc1",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2025-06-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "02",
+    "attributeName": "Remaining Quota",
+    "businessUnitId": "sales",
+    "customerLocationId": "loc2",
+    "companyId": "amicus",
+    "isActive": false,
+    "createdOn": "2025-07-01T10:00:00Z",
+    "notes": ""
+  },
+  {
+    "id": "03",
+    "attributeName": "Tax Bracket",
+    "businessUnitId": "finance",
+    "customerLocationId": "loc3",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2025-06-01T14:30:00Z",
+    "notes": "Global tax bracket definitions for amicus financial reporting."
+  },
+  {
+    "id": "04",
+    "attributeName": "Audit Flag",
+    "businessUnitId": "finance",
+    "customerLocationId": "loc4",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2025-08-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "05",
+    "attributeName": "Campaign Budget",
+    "businessUnitId": "marketing",
+    "customerLocationId": "loc5",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2025-09-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "06",
+    "attributeName": "Target Demographics",
+    "businessUnitId": "marketing",
+    "customerLocationId": "loc6",
+    "companyId": "amicus",
+    "isActive": false,
+    "createdOn": "2025-10-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "07",
+    "attributeName": "Q3 Revenue Target",
+    "businessUnitId": "sales",
+    "customerLocationId": "loc1",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2025-11-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "08",
+    "attributeName": "Employee Expense Limit",
+    "businessUnitId": "finance",
+    "customerLocationId": "loc4",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2025-12-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "09",
+    "attributeName": "Social Media Reach",
+    "businessUnitId": "marketing",
+    "customerLocationId": "loc5",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2026-01-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "10",
+    "attributeName": "Customer Satisfaction Score",
+    "businessUnitId": "sales",
+    "customerLocationId": "loc2",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2026-02-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "11",
+    "attributeName": "Payroll Adjustment",
+    "businessUnitId": "finance",
+    "customerLocationId": "loc3",
+    "companyId": "amicus",
+    "isActive": false,
+    "createdOn": "2026-03-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "12",
+    "attributeName": "Newsletter Subscribers",
+    "businessUnitId": "marketing",
+    "customerLocationId": "loc6",
+    "companyId": "partner",
+    "isActive": true,
+    "createdOn": "2026-04-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "13",
+    "attributeName": "Lead Conversion Rate",
+    "businessUnitId": "sales",
+    "customerLocationId": "loc1",
+    "companyId": "partner",
+    "isActive": true,
+    "createdOn": "2026-05-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "14",
+    "attributeName": "Annual Audit Compliance",
+    "businessUnitId": "finance",
+    "customerLocationId": "loc4",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2026-06-01T14:30:00Z",
+    "notes": ""
+  },
+  {
+    "id": "15",
+    "attributeName": "Brand Awareness Metrics",
+    "businessUnitId": "marketing",
+    "customerLocationId": "loc5",
+    "companyId": "amicus",
+    "isActive": true,
+    "createdOn": "2026-07-01T14:30:00Z",
+    "notes": ""
+  }
+]
