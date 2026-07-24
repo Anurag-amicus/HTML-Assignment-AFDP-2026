@@ -2,9 +2,9 @@ import { storage } from './storage.js';
 import { $ } from './dom.js';
 
 export const initLookups = () => {
-  const buSelect = $('#attr-bu');
-  const locSelect = $('#attr-location');
-  const companySelect = $('#attr-company');
+  const buSelect = $('#attribute-business-unit');
+  const locSelect = $('#attribute-location');
+  const companySelect = $('#attribute-company');
 
   if (!buSelect || !locSelect || !companySelect) return;
 

@@ -116,7 +116,7 @@ const renderTable = (data) => {
     
     tr.appendChild(createEl('td', { 'data-label': 'ID' }, item.id));
 
-    const thName = createEl('th', { scope: 'row', id: `attr-${item.id}`, className: 'attribute-card__title', 'data-label': 'Attribute Name' }, item.attributeName);
+    const thName = createEl('th', { scope: 'row', id: `attribute-${item.id}`, className: 'attribute-card__title', 'data-label': 'Attribute Name' }, item.attributeName);
     tr.appendChild(thName);
     
     tr.appendChild(createEl('td', { 'data-label': 'Business Unit' }, bu));
@@ -132,9 +132,9 @@ const renderTable = (data) => {
     statusCell.appendChild(badge);
     tr.appendChild(statusCell);
 
-    const actionCell = createEl('td', { headers: `col-actions attr-${item.id}`, className: 'attribute-actions', 'data-label': 'Actions' });
-    const editLink = createEl('a', { href: `edit-attribute.html?id=${item.id}`, className: 'btn btn--ghost btn--sm', 'aria-describedby': `attr-${item.id}` }, 'Edit');
-    const delBtn = createEl('button', { type: 'button', className: 'btn btn--danger btn--icon btn--sm', 'aria-describedby': `attr-${item.id}` });
+    const actionCell = createEl('td', { headers: `column-actions attribute-${item.id}`, className: 'attribute-actions', 'data-label': 'Actions' });
+    const editLink = createEl('a', { href: `edit-attribute.html?id=${item.id}`, className: 'btn btn--ghost btn--sm', 'aria-describedby': `attribute-${item.id}` }, 'Edit');
+    const delBtn = createEl('button', { type: 'button', className: 'btn btn--danger btn--icon btn--sm', 'aria-describedby': `attribute-${item.id}` });
     delBtn.innerHTML = `<span class="sr-only">Delete Attribute</span> 🗑️`;
     delBtn.addEventListener('click', () => {
       if (confirm(`Are you sure you want to delete '${item.attributeName}'?`)) {
@@ -158,8 +158,8 @@ const renderTable = (data) => {
     liveRegion.innerHTML = `<p>Showing ${data.length} records. Page ${state.page} of ${Math.ceil(data.length / PAGE_SIZE) || 1}.</p>`;
   }
 
-  const statTotal = $('#stat-total');
-  const statActive = $('#stat-active');
+  const statTotal = $('#statistic-total');
+  const statActive = $('#statistic-active');
   if (statTotal && statActive) {
     statTotal.textContent = `Total Tracked Attributes: ${data.length}`;
     statActive.textContent = `Operational Active States: ${data.filter(item => item.isActive).length}`;
@@ -222,7 +222,7 @@ export const initList = () => {
   if (params.get('status')) state.filter.status = params.get('status');
   
   const searchInput = $('#search-term');
-  const buFilter = $('#filter-bu');
+  const buFilter = $('#filter-business-unit');
   const statusFilter = $('#filter-status');
   if(searchInput) searchInput.value = state.filter.q;
   if(buFilter) buFilter.value = state.filter.bu;
@@ -287,13 +287,13 @@ export const initList = () => {
     state.sortDir = nextSort;
     
     const idMap = {
-      'col-id': 'id',
-      'col-name': 'attributeName',
-      'col-bu': 'businessUnitId',
-      'col-loc': 'customerLocationId',
-      'col-company': 'companyId',
-      'col-created': 'createdOn',
-      'col-status': 'isActive'
+      'column-id': 'id',
+      'column-name': 'attributeName',
+      'column-business-unit': 'businessUnitId',
+      'column-location': 'customerLocationId',
+      'column-company': 'companyId',
+      'column-created-on': 'createdOn',
+      'column-status': 'isActive'
     };
     state.sortCol = nextSort === 'none' ? null : idMap[th.id];
     

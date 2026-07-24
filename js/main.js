@@ -33,18 +33,18 @@ const boot = async () => {
     if (id) {
        const attr = attributesApi.getById(id);
        if (attr) {
-          document.querySelector('#attr-name').value = attr.attributeName;
+          document.querySelector('#attribute-name').value = attr.attributeName;
           
-          const bu = document.querySelector('#attr-bu');
+          const bu = document.querySelector('#attribute-business-unit');
           if(bu) {
             bu.value = attr.businessUnitId;
             bu.setAttribute('data-value', attr.businessUnitId);
           }
           
-          const loc = document.querySelector('#attr-location');
+          const loc = document.querySelector('#attribute-location');
           if(loc) loc.setAttribute('data-value', attr.customerLocationId);
 
-          const comp = document.querySelector('#attr-company');
+          const comp = document.querySelector('#attribute-company');
           if(comp) comp.setAttribute('data-value', attr.companyId);
 
           const statusAct = document.querySelector('#status-active');
@@ -52,10 +52,10 @@ const boot = async () => {
           if(statusAct) statusAct.checked = attr.isActive;
           if(statusInact) statusInact.checked = !attr.isActive;
 
-          const dateField = document.querySelector('#attr-date');
+          const dateField = document.querySelector('#attribute-date');
           if(dateField) dateField.value = attr.createdOn ? attr.createdOn.split('T')[0] : '';
           
-          const notesField = document.querySelector('#attr-notes');
+          const notesField = document.querySelector('#attribute-notes');
           if(notesField) notesField.value = attr.notes || '';
           
           const idField = document.querySelector('input[name="id"]');

@@ -79,7 +79,7 @@ A skip-link solves navigation fatigue. Keyboard-only and screen reader users wou
 
     There 3 warnings by W3C validation
 
-![Image](assets/W3C-index.html.png)
+![Image](assets/audit/W3C-index.html.png)
 
 These warnings are given because there is no need to define role to semantic tags
 
@@ -91,14 +91,14 @@ These warnings are given because there is no need to define role to semantic tag
 
 ### Lighthouse
 
-![HTML](assets/Lighthouse-index.html.png)
+![HTML](assets/audit/Lighthouse-index.html.png)
 
 96% accessibility achieved and the reason it did not reach 100% is beacause of accessing nav links inside `<ul> & <li>` tags otherwise it is reaching 100% if you only use `<a>`.
 
 ### Axe devtools
 
 No issues found
-![Image](assets/Axe-index.html.png)
+![Image](assets/audit/Axe-index.html.png)
 
 ## Task 10
 

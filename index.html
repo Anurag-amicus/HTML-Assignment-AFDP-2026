@@ -63,8 +63,8 @@
         </div>
 
         <div class="form-field">
-          <label class="form-field__label" for="filter-bu">Business Unit</label>
-          <select class="form-field__input" id="filter-bu" name="businessUnit">
+          <label class="form-field__label" for="filter-business-unit">Business Unit</label>
+          <select class="form-field__input" id="filter-business-unit" name="businessUnit">
             <option value="">All Business Units</option>
             <option value="sales">Sales</option>
             <option value="finance">Finance</option>
@@ -80,8 +80,6 @@
             <option value="inactive">Inactive Only</option>
           </select>
         </div>
-
-        <button class="btn btn--primary" type="submit">Apply Filters</button>
       </form>
     </section>
 
@@ -97,28 +95,28 @@
         <thead>
           <tr>
             <!-- Added IDs for the headers attribute mapping in the Actions column -->
-            <th id="col-id" scope="col" aria-sort="none">
+            <th id="column-id" scope="col" aria-sort="none">
               <button type="button" class="btn btn--ghost">ID</button>
             </th>
-            <th id="col-name" scope="col" aria-sort="none">
+            <th id="column-name" scope="col" aria-sort="none">
               <button type="button" class="btn btn--ghost">Attribute Name</button>
             </th>
-            <th id="col-bu" scope="col" aria-sort="none">
+            <th id="column-business-unit" scope="col" aria-sort="none">
               <button type="button" class="btn btn--ghost">Business Unit</button>
             </th>
-            <th id="col-loc" scope="col" aria-sort="none">
+            <th id="column-location" scope="col" aria-sort="none">
               <button type="button" class="btn btn--ghost">Location</button>
             </th>
-            <th id="col-company" scope="col" aria-sort="none">
+            <th id="column-company" scope="col" aria-sort="none">
               <button type="button" class="btn btn--ghost">Company</button>
             </th>
-            <th id="col-created" scope="col" aria-sort="none">
+            <th id="column-created-on" scope="col" aria-sort="none">
               <button type="button" class="btn btn--ghost">Created On</button>
             </th>
-            <th id="col-status" scope="col" aria-sort="none">
+            <th id="column-status" scope="col" aria-sort="none">
               <button type="button" class="btn btn--ghost">Status</button>
             </th>
-            <th id="col-actions" scope="col">Actions</th>
+            <th id="column-actions" scope="col">Actions</th>
           </tr>
         </thead>
         <tbody aria-live="polite">
@@ -126,12 +124,14 @@
       </table>
     </section>
 
-    <aside aria-label="Attribute statistics">
-      <h3>Quick Statistics</h3>
-      <ul>
-        <li id="stat-total">Total Tracked Attributes: 0</li>
-        <li id="stat-active">Operational Active States: 0</li>
-      </ul>
+    <aside aria-labelledby="stats-heading">
+      <h2 id="stats-heading">Quick Statistics</h2>
+      <div class="stats-card">
+        <ul>
+          <li id="statistic-total">Total Tracked Attributes: 0</li>
+          <li id="statistic-active">Operational Active States: 0</li>
+        </ul>
+      </div>
     </aside>
   </main>
   <footer role="contentinfo">

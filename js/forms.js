@@ -24,7 +24,7 @@ export const initForm = () => {
     
     let error = null;
     const allAttr = attributesApi.getAll();
-    const currentBu = $('#attr-bu')?.value;
+    const currentBu = $('#attribute-business-unit')?.value;
     const validLocs = storage.get('locations')?.filter(l => l.businessUnitId === currentBu);
 
     switch(name) {
@@ -68,7 +68,7 @@ export const initForm = () => {
 
     input.addEventListener('input', () => {
       if (input.name === 'notes') {
-         const hint = $('#attr-notes-hint');
+         const hint = $('#attribute-notes-hint');
          if (hint) {
            hint.textContent = `${input.value.length} / 500 characters`;
          }

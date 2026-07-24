@@ -70,41 +70,41 @@
           <fieldset>
             <legend>Attribute Details</legend>
             <div class="form-field">
-              <label class="form-field__label" for="attr-name"
+              <label class="form-field__label" for="attribute-name"
                 >Attribute Name</label
               >
               <input
                 class="form-field__input"
                 type="text"
-                id="attr-name"
+                id="attribute-name"
                 name="attributeName"
                 required
                 minlength="3"
                 maxlength="100"
                 pattern="^[a-zA-Z0-9 _-]+$"
-                aria-describedby="attr-name-hint attr-name-error"
+                aria-describedby="attribute-name-hint attribute-name-error"
               />
-              <span class="form-field__hint" id="attr-name-hint"
+              <span class="form-field__hint" id="attribute-name-hint"
                 >Letters, numbers, and spaces only (3-100 chars).</span
               >
               <span
                 class="form-field__error"
-                id="attr-name-error"
+                id="attribute-name-error"
                 role="alert"
                 aria-live="polite"
               ></span>
             </div>
 
             <div class="form-field">
-              <label class="form-field__label" for="attr-bu"
+              <label class="form-field__label" for="attribute-business-unit"
                 >Business Unit</label
               >
               <select
                 class="form-field__input"
-                id="attr-bu"
+                id="attribute-business-unit"
                 name="businessUnit"
                 required
-                aria-describedby="attr-bu-error"
+                aria-describedby="attribute-business-unit-error"
               >
                 <option value="">Select a Department...</option>
                 <option value="sales">Sales</option>
@@ -113,55 +113,55 @@
               </select>
               <span
                 class="form-field__error"
-                id="attr-bu-error"
+                id="attribute-business-unit-error"
                 role="alert"
                 aria-live="polite"
               ></span>
             </div>
 
             <div class="form-field">
-              <label class="form-field__label" for="attr-location"
+              <label class="form-field__label" for="attribute-location"
                 >Location</label
               >
               <select
                 class="form-field__input"
-                id="attr-location"
+                id="attribute-location"
                 name="customerLocation"
                 required
-                aria-describedby="attr-location-hint attr-location-error"
+                aria-describedby="attribute-location-hint attribute-location-error"
               >
                 <option value="">Select a Business Unit first</option>
               </select>
-              <span class="form-field__hint" id="attr-location-hint"
+              <span class="form-field__hint" id="attribute-location-hint"
                 >e.g., Regional Shops, Main Office.</span
               >
               <span
                 class="form-field__error"
-                id="attr-location-error"
+                id="attribute-location-error"
                 role="alert"
                 aria-live="polite"
               ></span>
             </div>
 
             <div class="form-field">
-              <label class="form-field__label" for="attr-company"
+              <label class="form-field__label" for="attribute-company"
                 >Company</label
               >
               <select
                 class="form-field__input"
-                id="attr-company"
+                id="attribute-company"
                 name="company"
                 required
-                aria-describedby="attr-company-hint attr-company-error"
+                aria-describedby="attribute-company-hint attribute-company-error"
               >
                 <option value="">Select a Company...</option>
               </select>
-              <span class="form-field__hint" id="attr-company-hint"
+              <span class="form-field__hint" id="attribute-company-hint"
                 >Name of the company.</span
               >
               <span
                 class="form-field__error"
-                id="attr-company-error"
+                id="attribute-company-error"
                 role="alert"
                 aria-live="polite"
               ></span>
@@ -172,7 +172,7 @@
             <legend>Operational Details</legend>
 
             <div class="form-field">
-              <span id="status-group-label">Is Active?</span>
+              <span id="status-group-label" class="form-field__label">Is Active?</span>
               <!-- Radio buttons wrapped in a group for screen readers -->
               <div role="group" aria-labelledby="status-group-label">
                 <input
@@ -201,24 +201,24 @@
             </div>
 
             <div class="form-field">
-              <label class="form-field__label" for="attr-date"
+              <label class="form-field__label" for="attribute-date"
                 >Creation Date (Required)</label
               >
               <input
                 class="form-field__input"
                 type="date"
-                id="attr-date"
+                id="attribute-date"
                 name="createdOn"
                 required
                 max="2026-07-14"
-                aria-describedby="attr-date-hint attr-date-error"
+                aria-describedby="attribute-date-hint attribute-date-error"
               />
-              <span class="form-field__hint" id="attr-date-hint"
+              <span class="form-field__hint" id="attribute-date-hint"
                 >Must be today or in the past.</span
               >
               <span
                 class="form-field__error"
-                id="attr-date-error"
+                id="attribute-date-error"
                 role="alert"
                 aria-live="polite"
               ></span>
@@ -228,21 +228,21 @@
           <fieldset>
             <legend>Additional Notes</legend>
             <div class="form-field">
-              <label class="form-field__label" for="attr-notes">Notes</label>
+              <label class="form-field__label" for="attribute-notes">Notes</label>
               <textarea
                 class="form-field__input"
-                id="attr-notes"
+                id="attribute-notes"
                 name="notes"
                 rows="4"
                 maxlength="500"
-                aria-describedby="attr-notes-hint attr-notes-error"
+                aria-describedby="attribute-notes-hint attribute-notes-error"
               ></textarea>
-              <span class="form-field__hint" id="attr-notes-hint"
+              <span class="form-field__hint" id="attribute-notes-hint"
                 >0 / 500 characters</span
               >
               <span
                 class="form-field__error"
-                id="attr-notes-error"
+                id="attribute-notes-error"
                 role="alert"
                 aria-live="polite"
               ></span>
