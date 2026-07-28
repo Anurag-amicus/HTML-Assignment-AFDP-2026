@@ -1,0 +1,5 @@
+[
+  { "id": "sales", "name": "Sales" },
+  { "id": "finance", "name": "Finance" },
+  { "id": "marketing", "name": "Marketing" }
+]

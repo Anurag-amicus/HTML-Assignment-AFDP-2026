@@ -1,0 +1,35 @@
+/* base.css */
+body {
+  font-family: var(--font-base);
+  font-size: var(--fs-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* Logical properties used below to support RTL layouts natively without overriding left/right */
+h1 { font-size: var(--fs-2xl); margin-block-end: var(--space-4); }
+h2 { font-size: var(--fs-xl); margin-block-end: var(--space-3); }
+h3 { font-size: var(--fs-lg); margin-block-end: var(--space-2); }
+
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+:target {
+  scroll-margin-top: var(--space-5);
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}

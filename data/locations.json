@@ -1,0 +1,8 @@
+[
+  { "id": "loc1", "businessUnitId": "sales", "name": "Online Store" },
+  { "id": "loc2", "businessUnitId": "sales", "name": "Regional Shops" },
+  { "id": "loc3", "businessUnitId": "finance", "name": "Global" },
+  { "id": "loc4", "businessUnitId": "finance", "name": "Main Office" },
+  { "id": "loc5", "businessUnitId": "marketing", "name": "Social Media" },
+  { "id": "loc6", "businessUnitId": "marketing", "name": "Email Outbound" }
+]
