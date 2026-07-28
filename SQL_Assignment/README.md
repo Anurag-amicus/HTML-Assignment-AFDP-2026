@@ -167,7 +167,7 @@ Using diverse test data helps verify different scenarios such as active and inac
 ## TASK 5 : Update and verify
 
 ### Before update query
-![image](/SQL_Screenshots/BeforeUpdateQuery.png)
+![image](/SQL_Assignment/SQL_Screenshots/BeforeUpdateQuery.png)
 
 
 ### update and verification query
@@ -181,7 +181,7 @@ Using diverse test data helps verify different scenarios such as active and inac
         WHERE BusinessUnitId = 2;
 
 ### After update
-![image](/SQL_Screenshots/Afterupdate.png)
+![image](/SQL_Assignment/SQL_Screenshots/Afterupdate.png)
 
 ### Why is the WHERE clause important?
 
@@ -196,7 +196,7 @@ The `WHERE` clause limits the update to the intended records. Without it, every 
     ON CL.CustomerLocationId = A.CustomerLocationId
     WHERE A.CustomerLocationId IS NULL;
 
-![image](/SQL_Screenshots/Delete_preview.png)
+![image](/SQL_Assignment/SQL_Screenshots/Delete_preview.png)
 
 ### Delete Query
 
@@ -207,7 +207,7 @@ The `WHERE` clause limits the update to the intended records. Without it, every 
         WHERE A.CustomerLocationId IS NULL;
 
 result after delete query
-![image](/SQL_Screenshots/Delete_result.png)
+![image](/SQL_Assignment/SQL_Screenshots/Delete_result.png)
 
 ## TASK 7
 
@@ -248,7 +248,7 @@ result after delete query
 
 ### merge audit table and after merging reslut
 
-![image](/SQL_Screenshots/merge.png)
+![image](/SQL_Assignment/SQL_Screenshots/merge.png)
 
 ### Why is MERGE useful compared to writing separate INSERT and UPDATE statements? What are common pitfalls of MERGE (e.g., the HALLOWEEN problem, missing semicolon)?
 
@@ -264,21 +264,21 @@ Common pitfalls include requiring a semicolon before MERGE in some contexts, ens
     FROM Attribute_AnuragChandra
     WHERE CreatedOn BETWEEN '2025-01-01' AND '2025-12-31';
 
-![image](/SQL_Screenshots/BETWEEN.png)
+![image](/SQL_Assignment/SQL_Screenshots/BETWEEN.png)
 
 ### IN 
 
     SELECT *
     FROM Attribute_AnuragChandra
     WHERE BusinessUnitId IN (1, 2, 3);
-![image](/SQL_Screenshots/IN.png)
+![image](/SQL_Assignment/SQL_Screenshots/IN.png)
 
 ### NOT IN
 
     SELECT *
     FROM Attribute_AnuragChandra
     WHERE BusinessUnitId NOT IN (1, 2, 3);
-![image](/SQL_Screenshots/NOTIN.png)
+![image](/SQL_Assignment/SQL_Screenshots/NOTIN.png)
 
 ### Using left join + is null
 
@@ -290,7 +290,7 @@ Common pitfalls include requiring a semicolon before MERGE in some contexts, ens
     ) AS B(BusinessUnitId)
     ON A.BusinessUnitId = B.BusinessUnitId
     WHERE B.BusinessUnitId IS NULL;
-![image](/SQL_Screenshots/Leftnull.png)
+![image](/SQL_Assignment/SQL_Screenshots/Leftnull.png)
 
 
 ### Why can NOT IN behave incorrectly when the inner list contains NULLs?
@@ -316,7 +316,7 @@ Common pitfalls include requiring a semicolon before MERGE in some contexts, ens
     FROM Attribute_AnuragChandra
     WHERE AttributeName LIKE '__o__';
 
-![image](/SQL_Screenshots/LIKE.png)
+![image](/SQL_Assignment/SQL_Screenshots/LIKE.png)
 
 
 ### AND/OR/NOT
@@ -331,7 +331,7 @@ Common pitfalls include requiring a semicolon before MERGE in some contexts, ens
     AND IsActive = 1
     AND NOT CreatedBy = 'Admin';
 
-![image](/SQL_Screenshots/ANDORNOT.png)
+![image](/SQL_Assignment/SQL_Screenshots/ANDORNOT.png)
 
 ### Why are parentheses important when mixing AND/OR?
 
@@ -345,7 +345,7 @@ Parentheses control the order of evaluation when combining AND and OR conditions
     FROM Attribute_AnuragChandra
     ORDER BY CreatedOn DESC;
 
-![image](/SQL_Screenshots/TOP10.png)
+![image](/SQL_Assignment/SQL_Screenshots/TOP10.png)
 
 ### Top 5 with ties
 
@@ -361,7 +361,7 @@ then query for top 5 with ties
     FROM Attribute_AnuragChandra
     ORDER BY CreatedOn DESC;
 
-![image](/SQL_Screenshots/TOP5TIES.png)
+![image](/SQL_Assignment/SQL_Screenshots/TOP5TIES.png)
 
 ### OFFSET 10 rows FETCH NEXT 10 rows
 
@@ -371,7 +371,7 @@ then query for top 5 with ties
     OFFSET 10 ROWS
     FETCH NEXT 10 ROWS ONLY;
 
-![image](/SQL_Screenshots/offset_fetch.png)
+![image](/SQL_Assignment/SQL_Screenshots/offset_fetch.png)
 
 ### Parameterized Paging
 
@@ -384,7 +384,7 @@ then query for top 5 with ties
     OFFSET (@PageNumber - 1) * @PageSize ROWS
     FETCH NEXT @PageSize ROWS ONLY;
 
-![image](/SQL_Screenshots/offset_fetch.png)
+![image](/SQL_Assignment/SQL_Screenshots/offset_fetch.png)
 
 ### TOP vs OFFSET-FETCH
 
@@ -395,19 +395,19 @@ then query for top 5 with ties
 ## TASK 10
 
 ### Total Number of Attributes per Business Unit
-![image](/SQL_Screenshots/Task10.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task10.png)
 
 ### Average Number of Attributes per Company
-![image](/SQL_Screenshots/Task102.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task102.png)
 
 ### Business Units with More Than 3 Active Attributes
-![image](/SQL_Screenshots/Task103.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task103.png)
 
 ### Company with the Maximum Number of Attributes
-![image](/SQL_Screenshots/Task104.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task104.png)
 
 ### Company with the Minimum Number of Attributes
-![image](/SQL_Screenshots/Task105.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task105.png)
 
 ### WHERE vs HAVING
 
@@ -418,17 +418,17 @@ then query for top 5 with ties
 ## Task 11
 
 ### Using LIKE
-![image](/SQL_Screenshots/Task111.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task111.png)
 
 ### Display AttributeName in UPPER case and first 10 characters
-![image](/SQL_Screenshots/Task112.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task112.png)
 
 ### AttributeName with Hyphen
 
-![image](/SQL_Screenshots/Task113.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task113.png)
 
 ### Show only longer than 10 characters
-![image](/SQL_Screenshots/Task114.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task114.png)
 
 ### String Functions
 
@@ -441,16 +441,16 @@ then query for top 5 with ties
 ## TASK 12
 
 ### Last 6 months
-![image](/SQL_Screenshots/Task121.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task121.png)
 
 ### Days since created
-![image](/SQL_Screenshots/Task122.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task122.png)
 
 ### Formatted Date
-![image](/SQL_Screenshots/Task123.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task123.png)
 
 ### Group Attributes by the month they were created
-![image](/SQL_Screenshots/Task124.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task124.png)
 
 ### FORMAT vs CONVERT
 
@@ -462,14 +462,14 @@ then query for top 5 with ties
 
 ### Display Status (Active / Inactive)
 
-![image](/SQL_Screenshots/Task131.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task131.png)
 
 ### Display Age Category
 
-![image](/SQL_Screenshots/Task132.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task132.png)
 
 ### Display Data Completeness
-![image](/SQL_Screenshots/Task133.png)
+![image](/SQL_Assignment/SQL_Screenshots/Task133.png)
 
 ### CASE Expression
 
@@ -479,7 +479,7 @@ The `CASE` expression is used to apply conditional logic in SQL queries. It eval
 
 ### Pivot query to achieve the desired result using count(AttributeId) and IsActive cast to set of known values
 
-![image](/SQL_Screenshots//Pivot.png)
+![image](/SQL_Assignment/SQL_Screenshots//Pivot.png)
 
 ### PIVOT
 
@@ -505,7 +505,7 @@ For a small number of columns, `CASE + GROUP BY` is often simpler and easier to 
 
 ### Unpivot
 
-![image](/SQL_Screenshots/Unpivot.png)
+![image](/SQL_Assignment/SQL_Screenshots/Unpivot.png)
 
 ### When is UNPIVOT useful?
 
@@ -514,7 +514,7 @@ The `UNPIVOT` operator converts columns into rows. It is useful when wide data n
 ## TASK 16
 
 ### Cross apply with values
-![image](/SQL_Screenshots/Crossapply.png)
+![image](/SQL_Assignment/SQL_Screenshots/Crossapply.png)
 
 ### CROSS APPLY with VALUES
 
