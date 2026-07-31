@@ -398,7 +398,7 @@ then query for top 5 with ties
 ![image](/SQL_Assignment/SQL_Screenshots/Task10.png)
 
 ### Average Number of Attributes per Company
-![image](/SQL_Assignment/SQL_Screenshots/Task102.png)
+![image](/SQL_Assignment/SQL_Screenshots/TAsk102.png)
 
 ### Business Units with More Than 3 Active Attributes
 ![image](/SQL_Assignment/SQL_Screenshots/Task103.png)
