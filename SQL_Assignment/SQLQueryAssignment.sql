@@ -266,6 +266,8 @@ UNIQUE (BusinessUnitId, AttributeName);
 
 --------------------------------------------------
 -- Verify Table Constraints
+-- COMMENT OUT/UNCOMMENT for Checking
+-- After checking truncate the tables
 --------------------------------------------------
 
 -- The following INSERT statements intentionally violate
@@ -275,10 +277,10 @@ UNIQUE (BusinessUnitId, AttributeName);
 -- Verify NOT NULL Constraint
 --------------------------------------------------
 
-INSERT INTO BusinessUnit_AnuragChandra
-(BusinessUnitName, IsActive, CreatedOn)
-VALUES
-('Paper', 1, GETDATE());
+-- INSERT INTO BusinessUnit_AnuragChandra
+-- (BusinessUnitName, IsActive, CreatedOn)
+-- VALUES
+-- ('Paper', 1, GETDATE());
 
 -- Expected Result:
 -- Cannot insert the value NULL into column 'CreatedBy'.
@@ -287,10 +289,10 @@ VALUES
 -- Verify DEFAULT Constraints
 --------------------------------------------------
 
-INSERT INTO BusinessUnit_AnuragChandra
-(BusinessUnitName, CreatedBy)
-VALUES
-('Paper', 'Anurag');
+-- INSERT INTO BusinessUnit_AnuragChandra
+-- (BusinessUnitName, CreatedBy)
+-- VALUES
+-- ('Paper', 'Anurag');
 
 -- Expected Result:
 -- Columns with DEFAULT constraints are populated automatically.
@@ -299,10 +301,10 @@ VALUES
 -- Verify CHECK Constraint
 --------------------------------------------------
 
-INSERT INTO BusinessUnit_AnuragChandra
-(BusinessUnitName, IsActive, CreatedOn, CreatedBy)
-VALUES
-('Paper', 1, '2099-01-01', 'Anurag');
+-- INSERT INTO BusinessUnit_AnuragChandra
+-- (BusinessUnitName, IsActive, CreatedOn, CreatedBy)
+-- VALUES
+-- ('Paper', 1, '2099-01-01', 'Anurag');
 
 -- Expected Result:
 -- CHECK constraint prevents future dates in CreatedOn.
@@ -311,19 +313,19 @@ VALUES
 -- Insert a Valid Business Unit
 --------------------------------------------------
 
-INSERT INTO BusinessUnit_AnuragChandra
-(BusinessUnitName, CreatedBy)
-VALUES
-('IT', 'Anurag');
+-- INSERT INTO BusinessUnit_AnuragChandra
+-- (BusinessUnitName, CreatedBy)
+-- VALUES
+-- ('IT', 'Anurag');
 
 --------------------------------------------------
 -- Verify FOREIGN KEY Constraint
 --------------------------------------------------
 
-INSERT INTO CustomerLocation_AnuragChandra
-(CustomerLocationName, BusinessUnitId, CreatedBy)
-VALUES
-('Ahmedabad', 1, 'Anurag');
+-- INSERT INTO CustomerLocation_AnuragChandra
+-- (CustomerLocationName, BusinessUnitId, CreatedBy)
+-- VALUES
+-- ('Ahmedabad', 1, 'Anurag');
 
 -- Expected Result:
 -- FOREIGN KEY constraint fails if the referenced
@@ -333,19 +335,19 @@ VALUES
 -- Insert a Valid Customer Location
 --------------------------------------------------
 
-INSERT INTO CustomerLocation_AnuragChandra
-(CustomerLocationName, BusinessUnitId, CreatedBy)
-VALUES
-('Ahmedabad', 3, 'Anurag');
+-- INSERT INTO CustomerLocation_AnuragChandra
+-- (CustomerLocationName, BusinessUnitId, CreatedBy)
+-- VALUES
+-- ('Ahmedabad', 3, 'Anurag');
 
 --------------------------------------------------
 -- Insert a Valid Company
 --------------------------------------------------
 
-INSERT INTO Company_AnuragChandra
-(CompanyName, CreatedBy)
-VALUES
-('Amicus', 'Anurag');
+-- INSERT INTO Company_AnuragChandra
+-- (CompanyName, CreatedBy)
+-- VALUES
+-- ('Amicus', 'Anurag');
 
 --------------------------------------------------
 -- Verify UNIQUE Constraint
@@ -354,10 +356,10 @@ VALUES
 -- Execute the following INSERT twice to verify
 -- the composite UNIQUE constraint.
 
-INSERT INTO Attribute_AnuragChandra
-(AttributeName, BusinessUnitId, CustomerLocationId, CompanyId, CreatedBy)
-VALUES
-('Color', 3, 3, 1, 'Anurag');
+-- INSERT INTO Attribute_AnuragChandra
+-- (AttributeName, BusinessUnitId, CustomerLocationId, CompanyId, CreatedBy)
+-- VALUES
+-- ('Color', 3, 3, 1, 'Anurag');
 
 -- Expected Result:
 -- The second INSERT fails because the combination of
@@ -367,10 +369,10 @@ VALUES
 -- Verify FOREIGN KEY Constraint on Attribute Table
 --------------------------------------------------
 
-INSERT INTO Attribute_AnuragChandra
-(AttributeName, BusinessUnitId, CustomerLocationId, CompanyId, CreatedBy)
-VALUES
-('Size', 999, 999, 999, 'Anurag');
+-- INSERT INTO Attribute_AnuragChandra
+-- (AttributeName, BusinessUnitId, CustomerLocationId, CompanyId, CreatedBy)
+-- VALUES
+-- ('Size', 999, 999, 999, 'Anurag');
 
 -- Expected Result:
 -- FOREIGN KEY constraint fails because the referenced
@@ -1055,3 +1057,12 @@ CROSS APPLY
         ('Inactive', AC.InactiveCount),
         ('Total', AC.ActiveCount + AC.InactiveCount)
 ) AS X(StatusType, StatusValue);
+
+
+SELECT *
+FROM   Attribute_AnuragChandra;
+
+SELECT *
+FROM   BusinessUnit_AnuragChandra;
+SELECT * FROM Company_AnuragChandra;
+SELECT * FROM CustomerLocation_AnuragChandra;
