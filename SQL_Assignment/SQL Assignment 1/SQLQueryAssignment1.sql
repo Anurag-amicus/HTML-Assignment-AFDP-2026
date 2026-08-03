@@ -1061,7 +1061,6 @@ CROSS APPLY
 
 SELECT *
 FROM   Attribute_AnuragChandra;
-
 SELECT *
 FROM   BusinessUnit_AnuragChandra;
 SELECT * FROM Company_AnuragChandra;
