@@ -451,6 +451,23 @@ SELECT
   ON B.BusinessUnitId = A.BusinessUnitId
 WHERE A.BusinessUnitId IS NULL;
 
+-- Most recently craeted attribute name and date per business unit
+
+SELECT
+    B.BusinessUnitId,
+    B.BusinessUnitName,
+    A.AttributeName,
+    A.CreatedOn
+FROM BusinessUnit_AnuragChandra AS B
+JOIN Attribute_AnuragChandra AS A
+    ON B.BusinessUnitId = A.BusinessUnitId
+WHERE A.CreatedOn =
+(
+    SELECT MAX(A2.CreatedOn)
+    FROM Attribute_AnuragChandra AS A2 
+    WHERE A2.BusinessUnitId = B.BusinessUnitId
+);
+
 
 -- Task 7
 
