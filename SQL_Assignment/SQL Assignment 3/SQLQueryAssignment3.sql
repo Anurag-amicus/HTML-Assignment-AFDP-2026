@@ -17,14 +17,14 @@ SELECT
     A.AttributeName,
     B.BusinessUnitName,
     A.CreatedOn,
-    ROW_NUMBER() OVER
-    (
+    ROW_NUMBER() OVER (
         PARTITION BY A.BusinessUnitId
-        ORDER BY A.CreatedOn DESC
+        ORDER BY
+            A.CreatedOn DESC
     ) AS RowNum
-FROM Attribute_AnuragChandra A
-JOIN BusinessUnit_AnuragChandra B
-    ON A.BusinessUnitId = B.BusinessUnitId;
+FROM
+    Attribute_AnuragChandra A
+    JOIN BusinessUnit_AnuragChandra B ON A.BusinessUnitId = B.BusinessUnitId;
 
 --Find the most recently created Attribute per BU
 
@@ -78,7 +78,11 @@ SELECT
     ) AS DenseRank
 FROM Attribute_AnuragChandra A
 JOIN BusinessUnit_AnuragChandra B
-    ON A.BusinessUnitId = B.BusinessUnitId;
+    ON A.BusinessUnitId = B.BusinessUnitId
+ORDER BY
+    B.BusinessUnitName,
+    A.AttributeName,
+    A.CreatedOn;
 
 
 -- NTILE()

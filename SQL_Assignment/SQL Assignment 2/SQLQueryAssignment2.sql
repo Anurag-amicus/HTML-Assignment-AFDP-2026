@@ -418,16 +418,12 @@ WHERE BusinessUnitId =
 
 -- Business Units where at least one Attribute was created by "Admin"
 
-SELECT 
-    Distinct BusinessUnitName
-    FROM BusinessUnit_AnuragChandra B 
-    Where Exists
-            (
-            SELECT 1
-            FROM Attribute_AnuragChandra A
-            WHERE A.BusinessUnitId = B.BusinessUnitId
-            AND A.CreatedBy = 'Admin'
-            )
+SELECT DISTINCT BusinessUnitName
+FROM   BusinessUnit_AnuragChandra AS B
+WHERE  EXISTS (SELECT 1
+               FROM   Attribute_AnuragChandra AS A
+               WHERE  A.BusinessUnitId = B.BusinessUnitId
+                      AND A.CreatedBy = 'Admin');
 
 
 -- Business Units where NO Attributes exist using subqueries

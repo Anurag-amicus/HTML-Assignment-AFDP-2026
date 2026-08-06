@@ -679,9 +679,12 @@ AND NOT CreatedBy = 'Admin';
 -- Retrieve the Top 10 Most Recently Created Records
 ----------------------------------------------------
 
-SELECT TOP 10 *
-FROM Attribute_AnuragChandra
-ORDER BY CreatedOn DESC;
+SELECT
+    TOP 10 *
+FROM
+    Attribute_AnuragChandra
+ORDER BY
+    CreatedOn DESC;
 
 --------------------------------------------------
 -- Prepare Data for TOP WITH TIES Demonstration
@@ -690,10 +693,12 @@ ORDER BY CreatedOn DESC;
 -- Update multiple records to have the same CreatedOn value
 -- so they qualify as ties in the TOP query.
 
-UPDATE Attribute_AnuragChandra
-SET CreatedOn = '2026-03-29 11:33:20.5100000'
-WHERE AttributeId in (7,8,9);
-
+UPDATE
+    Attribute_AnuragChandra
+SET
+    CreatedOn = '2026-03-29 11:33:20.5100000'
+WHERE
+    AttributeId in (7, 8, 9);
 --------------------------------------------------
 -- Retrieve the Top 5 Records Including Ties
 --------------------------------------------------
@@ -865,15 +870,15 @@ SELECT
     AttributeName,
     CreatedOn,
     DATEDIFF(DAY, CreatedOn, GETDATE()) AS DaysSinceCreated
-FROM Attribute_AnuragChandra;
+FROM
+    Attribute_AnuragChandra;
 
 --------------------------------------------------
 -- Display Created Date in dd-MMM-yyyy Format
 --------------------------------------------------
 
-SELECT
-    AttributeName,
-    FORMAT(CreatedOn, 'dd-MMM-yyyy') AS FormattedDate
+SELECT AttributeName,
+	FORMAT(CreatedOn, 'dd-MMM-yyyy') AS FormattedDate
 FROM Attribute_AnuragChandra;
 
 --------------------------------------------------
@@ -952,15 +957,22 @@ FROM Attribute_AnuragChandra;
 -- Using Conditional Aggregation (Without PIVOT)
 --------------------------------------------------
 
-select 
-    BusinessUnitName, 
-    SUM(CASE WHEN A.IsActive = 1 THEN 1 ELSE 0 END) AS Active,
-    SUM(CASE WHEN A.IsActive = 0 THEN 1 ELSE 0 END) AS Inactive
-    from Attribute_AnuragChandra A 
-    join BusinessUnit_AnuragChandra B 
-    on A.BusinessUnitId = B.BusinessUnitId 
-   group by B.BusinessUnitId,BusinessUnitName
-   order by BusinessUnitName;
+SELECT BusinessUnitName,
+	SUM(CASE 
+			WHEN A.IsActive = 1
+				THEN 1
+			ELSE 0
+			END) AS Active,
+	SUM(CASE 
+			WHEN A.IsActive = 0
+				THEN 1
+			ELSE 0
+			END) AS Inactive
+FROM Attribute_AnuragChandra A
+JOIN BusinessUnit_AnuragChandra B ON A.BusinessUnitId = B.BusinessUnitId
+GROUP BY B.BusinessUnitId,
+	BusinessUnitName
+ORDER BY BusinessUnitName;
 
 --------------------------------------------------
 -- Display Active and Inactive Attribute Counts
@@ -972,20 +984,15 @@ SELECT
     ISNULL([1], 0) AS Active,
     ISNULL([0], 0) AS Inactive
 FROM
-(
-    SELECT
-        B.BusinessUnitName,
-        A.AttributeId,
-        A.IsActive
-    FROM Attribute_AnuragChandra AS A
-    JOIN BusinessUnit_AnuragChandra AS B
-        ON A.BusinessUnitId = B.BusinessUnitId
-) AS SourceTable
-PIVOT
-(
-    COUNT(AttributeId)
-    FOR IsActive IN ([1], [0])
-) AS PivotTable;
+    (
+        SELECT
+            B.BusinessUnitName,
+            A.AttributeId,
+            A.IsActive
+        FROM
+            Attribute_AnuragChandra AS A
+            JOIN BusinessUnit_AnuragChandra AS B ON A.BusinessUnitId = B.BusinessUnitId
+    ) AS SourceTable PIVOT(COUNT(AttributeId) FOR IsActive IN ([1], [0])) AS PivotTable;
 
 --------------------------------------------------
 --------------------------------------------------
